@@ -1,0 +1,45 @@
+Jan 30, 2025
+
+Discussed the merits of liquid vs. vapor feed for MeOH.
+Considered alloys for electrodes
+Have not considered cost so far
+In the MeOH reduction mechanism, there is CO as byproduct.
+To avoid CO poisoning of Pt electrodes, we elected to go with Pt-Ru plates for now
+Might change mind if cost is prohibitive 
+Discussed support for electrode
+
+
+Scratched the idea of vaporizing MeOH on hot plate and holding MEA on top
+
+Start by pursuing passive feed
+
+Read paper (Direct Methanol Fuel Cell, chapter 14)
+
+
+Searched literature
+
+Consulted with Joe
+
+
+
+
+Future things to do:
+Pursue both liquid and vapor feeds, and compare the merits of each
+Carbon footprint of our materials
+Make our own Pt-Ru nanoparticle/alloy
+Pursue active control methods if given time
+
+References
+
+
+https://www.sciencedirect.com/science/article/pii/S0378775322015713
+
+See references for other useful readings
+
+
+Textbook DFMC mentions Toshiba 2009 design, if we can find it
+
+https://patents.google.com/patent/US6146781A/en
+
+https://patents.google.com/patent/US8278003
+
