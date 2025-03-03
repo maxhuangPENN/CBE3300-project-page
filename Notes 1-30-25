@@ -1,3 +1,22 @@
+Monday Mar 03
+
+- Jack and Max in the lab
+- we designed the circuitry and a feasible schedule to reach our design goals
+- See picture here: https://github.com/maxhuangPENN/CBE3300-project-page/blob/main/IMG_5839.jpeg
+
+- Picture explained:
+    - We plan on controlling peristaltic pump with an Arduino-based circuitry
+    - Load testing with oscilloscope
+
+- Schedule:
+    - Mar 03-07: Controls (Arduino code, circuit diagrams, peristaltic tubing compatibility)
+    - Mar 10-14: Spring Break
+    - Mar 17-21: Controls (Peristaltic pump calibration, soldering, oscilloscope load testing, and voltage readings using Processing IDE)
+    - Mar 24-29: Integration 
+    - April first week: Optimization (horizonal/vertical stack, varying [MeOH] and Q, pressure air feed, pure O2)
+
+
+
 Sun Mar 02
 
 - Max: updated this log, last updated by Max on Feb 21
