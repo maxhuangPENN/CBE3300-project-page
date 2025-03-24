@@ -3,28 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBE 3300B Project Page</title>
+    <title>DMFC Project Overview</title>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
     <header>
-        <h1>Welcome!</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Methanol Fuel Cell</h2>
-            <p>More info coming soon!</p>
-        </section>
-        <section>
-            <h2>Team Members</h2>
+        <nav>
             <ul>
-                <li>Karam Alkaissy</li>
-                <li>Max Huang</li>
-                <li>Jack Leitzell</li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#progress">Progress</a></li>
+                <li><a href="#documents">Documents</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </section>
-    </main>
+        </nav>
+    </header>
+
+    <!-- Project Overview -->
+    <section id="overview">
+        <h2>Project Overview</h2>
+        <p>
+            This project focuses on the development and optimization of a Direct Methanol Fuel Cell (DMFC) system.
+            Our goal is to design a high-efficiency DMFC that can reliably generate electrical energy from methanol
+            while minimizing methanol crossover and improving fuel utilization.
+        </p>
+        <p>
+            We are testing different operating conditions, including fuel concentration, feed rates, and geometric configurations.
+            Additionally, we aim to fabricate our own Membrane Electrode Assembly (MEA) to explore cost-effective alternatives.
+        </p>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress">
+        <h2>Project Progress</h2>
+        <p>
+            We have successfully completed the initial setup of the fuel cell stack and achieved stable voltage output under controlled conditions.
+            The control system (using Arduino) is partially integrated, and early tests have shown promising results.
+        </p>
+        <p>
+            We are currently working on optimizing fuel delivery using peristaltic pumps and exploring the impact of different methanol concentrations on performance.
+        </p>
+        <img src="assets/gantt_chart.png" alt="Project Gantt Chart" style="max-width: 80%;">
+        <p><strong>Click <a href="assets/gantt_chart.pdf" target="_blank">here</a> to view the full Gantt chart.</strong></p>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documents">
+        <h2>Documents</h2>
+        <ul>
+            <li><a href="assets/initial_report.pdf" target="_blank">Initial Design Report</a></li>
+            <li><a href="assets/safety_sheet.pdf" target="_blank">Safety Data Sheet</a></li>
+            <li><a href="assets/progress_log.pdf" target="_blank">Progress Log</a></li>
+            <li><a href="assets/calibration_curve.pdf" target="_blank">Peristaltic Pump Calibration Curve</a></li>
+            <li><a href="assets/circuit_diagram.png" target="_blank">Circuit Diagram</a></li>
+        </ul>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results">
+        <h2>Experimental Results</h2>
+        <p>
+            Our testing indicates that the fuel cell outputs approximately <strong>19W</strong> under 50 mA/cm² operating conditions, increasing to
+            <strong>~30W</strong> at 100 mA/cm². Methanol crossover remains within acceptable limits at 1M concentration.
+        </p>
+        <img src="assets/results_chart.png" alt="Performance Chart" style="max-width: 80%;">
+        <p><strong>Click <a href="assets/results_chart.pdf" target="_blank">here</a> to view the full data set.</strong></p>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2>Team Members</h2>
+        <div class="team-member">
+            <img src="assets/karam.jpg" alt="Karam">
+            <p><strong>Karam Alkaissy</strong> – System Integration and Control</p>
+        </div>
+        <div class="team-member">
+            <img src="assets/max.jpg" alt="Max">
+            <p><strong>Max Huang</strong> – Performance Optimization and Data Analysis</p>
+        </div>
+        <div class="team-member">
+            <img src="assets/jack.jpg" alt="Jack">
+            <p><strong>Jack Leitzell</strong> – MEA Fabrication and Testing</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>
+            For more information or questions, please contact us at: 
+            <a href="mailto:max@example.com">max@example.com</a>
+            or visit the 
+            <a href="https://github.com/your-repo" target="_blank">GitHub repository</a>.
+        </p>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Project Team</p>
+        <p>&copy; 2025 Methanol Dynamics. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
+
