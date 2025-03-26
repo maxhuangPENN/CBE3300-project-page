@@ -1,5 +1,19 @@
+Tuesday March 25
 
-March 24
+- Jack's laptop fixed
+- We ran our setup in the fume hood and obtained no voltage output
+- The cell was running for about 2.5 mins with a 3% by weight MeOH feed, at 110 cc/min
+
+- Potential errors we will try to debug, in order of most to least likely (we will work our way down this list):
+
+	1. Fuel cell not activated, DMFCs often require hydration and/or warm-up time before delivering power. Let the stack soak for 10–20 minutes before testing again. Literature also suggest flowing lower MeOH concentrations at first and slowly ramping that up (and all this while operating fan, to ensure cathode isn't air-starved).
+	2. Flow rate too high. The manufacturer specifies 10 cc/cell/min, which is why we aim to flow at 100 cc/min (10 cells). But we can imagine a world where there is insufficient residence time and where the MeOH flushes past the catalyst without enough time to react. We can experiment with lower flow rates.
+	3. Not enough oxygen. The fume hood should do enough, but we can definitely increase airflow using the provided fan.
+	4. MEA misalignment: when we disassemble the stack, we should look for misaligned MEAs. The common feedback for this kind of stack is that they are sometimes not aligned, but ours came with guide dowels, so this should not be an issue. The stack specifies 8-10 in-lbs of compression across the cell to ensure proper contact, but we have no way of properly measuring this, so we are putting this metric on the back burner for now.
+    5. In case we suspect a faulty cell: Perhaps measure voltage 1 cell at a time to identify the faulty one.
+
+
+Monday March 24
 
 - Fixed plumbing issues for methanol inlet and outlet
 - Reran calibration tests for the 3x5 peristaltic pump (measured 75cc/min flow rate at around 11.4 V from battery pack)
