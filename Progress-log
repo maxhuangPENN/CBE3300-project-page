@@ -5,6 +5,7 @@ Ran fuel cell for 20 minutes with load
 Collected data on current voltage behaviour using circuit from last time
 
 Next steps:
+Highest priority: More voltage with fan
 Consolidate circuits onto a soldered circuit board and streamline electrical connections
 Interface with arduino
 3D print housing unit to contain circuits and pump
