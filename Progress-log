@@ -1,3 +1,16 @@
+Monday March 31-
+
+Mixed more methanol solution
+Ran fuel cell for 20 minutes with load
+Collected data on current voltage behaviour using circuit from last time
+
+Next steps:
+Consolidate circuits onto a soldered circuit board and streamline electrical connections
+Interface with arduino
+3D print housing unit to contain circuits and pump
+Research charging a battery pack
+
+
 Friday March 28th-
 
 Jack- built circuit that interfaces with fuel cell. One side is high-inpedance voltage divider in order to pull the fuel cell output down into a range that the arduino can measure. The other side is is pot, led and ammeter in series in order to measure current vs voltage behaviour.
