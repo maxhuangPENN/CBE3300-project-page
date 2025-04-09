@@ -28,6 +28,102 @@
     </p>
   </section>
 
+
+  <section id="context">
+  <h2>Full Project Background & Technical Overview</h2>
+
+  <h3>Introduction</h3>
+  <p>
+    Our project investigates the design, construction, and optimization of a Direct Methanol Fuel Cell (DMFC)
+    system. DMFCs convert the chemical energy of methanol into electrical energy via redox reactions, offering
+    a compact and clean energy source for portable applications.
+  </p>
+
+  <h3>How the DMFC Works</h3>
+  <p>
+    In a DMFC, methanol (CH<sub>3</sub>OH) is oxidized at the anode, producing carbon dioxide, protons (H<sup>+</sup>), 
+    and electrons (e<sup>−</sup>):
+  </p>
+  <p class="equation">
+    CH<sub>3</sub>OH + H<sub>2</sub>O → CO<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup>
+  </p>
+  <p>
+    The protons pass through a proton exchange membrane (PEM), usually made of Nafion, while the electrons flow
+    through an external circuit, generating power. At the cathode, oxygen (O<sub>2</sub>) is reduced:
+  </p>
+  <p class="equation">
+    (3/2)O<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup> → 3H<sub>2</sub>O
+  </p>
+  <p>
+    This closes the circuit and produces water. The theoretical EMF of a DMFC is ~1.20V per cell, though real-world
+    values range from 0.3–0.6V due to losses from catalyst efficiency, methanol crossover, and membrane resistance.
+  </p>
+
+  <h3>Prototyping Strategy</h3>
+  <p>We’re developing the project in stages:</p>
+  <ul>
+    <li><strong>MVP:</strong> A basic functional stack with passive methanol feed and commercial MEA.</li>
+    <li><strong>Optimization:</strong> We will test active control (Arduino, sensors), vapor feed vs. liquid feed, vertical vs. horizontal orientation, and our own MEA fabrication.</li>
+    <li><strong>Final Goal:</strong> Achieve a reliable output of 5V using serially connected cells, refined flow control, and monitored performance.</li>
+  </ul>
+
+  <h3>Technical Goals</h3>
+  <ul>
+    <li>Maintain operating current densities around 50–100 mA/cm²</li>
+    <li>Charge a 20,000 mAh power bank within 24 hours</li>
+    <li>Use 3% methanol by mass (≈1M) at flow rates around 100 cc/min</li>
+    <li>Keep methanol crossover to a minimum</li>
+  </ul>
+
+  <h3>Key Calculations (Nernst Equation)</h3>
+  <p>
+    To estimate voltage under real conditions, we used the Nernst Equation:
+  </p>
+  <p class="equation">
+    E = E<sup>0</sup> − (RT / nF) ln(Q)
+  </p>
+  <p>Where:</p>
+  <ul>
+    <li>E<sup>0</sup> = 1.20V</li>
+    <li>n = 6 (electrons transferred)</li>
+    <li>T = 298K</li>
+    <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>) / ([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
+  </ul>
+  <p>
+    Using realistic estimates (40% efficiency), our target system voltage is 4–6V, which is achievable using
+    10 serially stacked cells operating at mid-efficiency.
+  </p>
+
+  <h3>Development Timeline</h3>
+  <p>Our workflow follows a clear week-by-week plan:</p>
+  <ul>
+    <li><strong>Weeks 1–3:</strong> Research, order parts, build early prototype</li>
+    <li><strong>Weeks 4–6:</strong> Begin testing, measure voltage, compare to theory</li>
+    <li><strong>Weeks 7–9:</strong> Add sensors and Arduino control, explore vertical orientation</li>
+    <li><strong>Weeks 10–11:</strong> Try vapor feed, fabricate custom MEA</li>
+    <li><strong>Weeks 12–13:</strong> Final optimizations and voltage tuning</li>
+    <li><strong>Week 14:</strong> Final presentation and documentation submission</li>
+  </ul>
+
+  <h3>Major Components</h3>
+  <ul>
+    <li>Commercial MEA with Pt-Ru anode and Pt cathode layers</li>
+    <li>Proton Exchange Membrane (Nafion)</li>
+    <li>Peristaltic pumps for methanol feed</li>
+    <li>Flow, temperature, and voltage sensors (Arduino-connected)</li>
+    <li>Option for vapor methanol feed via nitrogen bubbling (TBD)</li>
+  </ul>
+
+  <h3>Final Notes on Purchasing Strategy</h3>
+  <p>
+    We intentionally delayed purchasing vaporization equipment and sensors until testing our MVP, to ensure we don’t
+    invest prematurely in components that may not align with our final fuel strategy. Many of the parts we expect to find
+    locally in shared labs or through assistance from Dr. Huff.
+  </p>
+</section>
+
+
+  
   <!-- Instructions Section -->
   <section id="instructions">
     <h2>How to Build and Run the Setup</h2>
