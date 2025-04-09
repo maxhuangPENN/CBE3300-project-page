@@ -1,10 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DMFC Project – Methanol Dynamics</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
 <body>
-  <header>
+  <header class="site-header">
     <h1>Direct Methanol Fuel Cell (DMFC) Project</h1>
     <p>University of Pennsylvania – CBE 3300B</p>
-    <nav>
+    <nav class="site-nav">
       <ul>
         <li><a href="#overview">Overview</a></li>
+        <li><a href="#context">Background</a></li>
         <li><a href="#instructions">Instructions</a></li>
         <li><a href="#progress">Progress</a></li>
         <li><a href="#results">Results</a></li>
@@ -15,7 +25,7 @@
   </header>
 
   <!-- Project Overview -->
-  <section id="overview">
+  <section id="overview" class="section">
     <h2>Project Overview</h2>
     <p>
       This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on 3% methanol solution (~1M), and is designed to produce sufficient voltage and current to charge a 20,000 mAh battery pack within 24 hours.
@@ -28,193 +38,151 @@
     </p>
   </section>
 
+  <!-- Full Technical Context -->
+  <section id="context" class="section">
+    <h2>Full Project Background & Technical Overview</h2>
 
-  <section id="context">
-  <h2>Full Project Background & Technical Overview</h2>
+    <h3>How the DMFC Works</h3>
+    <p>
+      In a DMFC, methanol (CH<sub>3</sub>OH) is oxidized at the anode:
+    </p>
+    <p class="equation">
+      CH<sub>3</sub>OH + H<sub>2</sub>O → CO<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup>
+    </p>
+    <p>
+      Protons pass through a proton exchange membrane (PEM) to the cathode, while electrons go through an external circuit. At the cathode:
+    </p>
+    <p class="equation">
+      (3/2)O<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup> → 3H<sub>2</sub>O
+    </p>
+    <p>
+      The theoretical cell voltage is ~1.20 V, but practical output is closer to 0.3–0.6 V due to real-world losses.
+    </p>
 
-  <h3>Introduction</h3>
-  <p>
-    Our project investigates the design, construction, and optimization of a Direct Methanol Fuel Cell (DMFC)
-    system. DMFCs convert the chemical energy of methanol into electrical energy via redox reactions, offering
-    a compact and clean energy source for portable applications.
-  </p>
+    <h3>Prototyping Strategy</h3>
+    <ul>
+      <li><strong>MVP:</strong> Basic 10-cell stack with passive MeOH feed and commercial MEA</li>
+      <li><strong>Next:</strong> Active control, vertical vs. horizontal orientation, vapor feed</li>
+      <li><strong>Stretch Goal:</strong> 5V output, our own MEA assembly, and charge a 20,000 mAh pack</li>
+    </ul>
 
-  <h3>How the DMFC Works</h3>
-  <p>
-    In a DMFC, methanol (CH<sub>3</sub>OH) is oxidized at the anode, producing carbon dioxide, protons (H<sup>+</sup>), 
-    and electrons (e<sup>−</sup>):
-  </p>
-  <p class="equation">
-    CH<sub>3</sub>OH + H<sub>2</sub>O → CO<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup>
-  </p>
-  <p>
-    The protons pass through a proton exchange membrane (PEM), usually made of Nafion, while the electrons flow
-    through an external circuit, generating power. At the cathode, oxygen (O<sub>2</sub>) is reduced:
-  </p>
-  <p class="equation">
-    (3/2)O<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup> → 3H<sub>2</sub>O
-  </p>
-  <p>
-    This closes the circuit and produces water. The theoretical EMF of a DMFC is ~1.20V per cell, though real-world
-    values range from 0.3–0.6V due to losses from catalyst efficiency, methanol crossover, and membrane resistance.
-  </p>
+    <h3>Key Technical Targets</h3>
+    <ul>
+      <li>Current density: 50–100 mA/cm²</li>
+      <li>Flow rate: 100 cc/min</li>
+      <li>Fuel: 3% methanol by weight (≈1M)</li>
+      <li>Efficiency: 20–40%</li>
+    </ul>
 
-  <h3>Prototyping Strategy</h3>
-  <p>We’re developing the project in stages:</p>
-  <ul>
-    <li><strong>MVP:</strong> A basic functional stack with passive methanol feed and commercial MEA.</li>
-    <li><strong>Optimization:</strong> We will test active control (Arduino, sensors), vapor feed vs. liquid feed, vertical vs. horizontal orientation, and our own MEA fabrication.</li>
-    <li><strong>Final Goal:</strong> Achieve a reliable output of 5V using serially connected cells, refined flow control, and monitored performance.</li>
-  </ul>
+    <h3>Nernst Equation</h3>
+    <p class="equation">
+      E = E<sup>0</sup> − (RT / nF) ln(Q)
+    </p>
+    <ul>
+      <li>E<sup>0</sup> = 1.20 V</li>
+      <li>n = 6 (electrons)</li>
+      <li>T = 298 K</li>
+      <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>) / ([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
+    </ul>
 
-  <h3>Technical Goals</h3>
-  <ul>
-    <li>Maintain operating current densities around 50–100 mA/cm²</li>
-    <li>Charge a 20,000 mAh power bank within 24 hours</li>
-    <li>Use 3% methanol by mass (≈1M) at flow rates around 100 cc/min</li>
-    <li>Keep methanol crossover to a minimum</li>
-  </ul>
+    <h3>Development Timeline</h3>
+    <ul>
+      <li><strong>Weeks 1–3:</strong> Research and part ordering</li>
+      <li><strong>Weeks 4–6:</strong> Initial testing and validation</li>
+      <li><strong>Weeks 7–9:</strong> Sensor integration and performance experiments</li>
+      <li><strong>Weeks 10–13:</strong> Optimization and MEA fabrication</li>
+      <li><strong>Week 14:</strong> Final demo and report</li>
+    </ul>
+  </section>
 
-  <h3>Key Calculations (Nernst Equation)</h3>
-  <p>
-    To estimate voltage under real conditions, we used the Nernst Equation:
-  </p>
-  <p class="equation">
-    E = E<sup>0</sup> − (RT / nF) ln(Q)
-  </p>
-  <p>Where:</p>
-  <ul>
-    <li>E<sup>0</sup> = 1.20V</li>
-    <li>n = 6 (electrons transferred)</li>
-    <li>T = 298K</li>
-    <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>) / ([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
-  </ul>
-  <p>
-    Using realistic estimates (40% efficiency), our target system voltage is 4–6V, which is achievable using
-    10 serially stacked cells operating at mid-efficiency.
-  </p>
-
-  <h3>Development Timeline</h3>
-  <p>Our workflow follows a clear week-by-week plan:</p>
-  <ul>
-    <li><strong>Weeks 1–3:</strong> Research, order parts, build early prototype</li>
-    <li><strong>Weeks 4–6:</strong> Begin testing, measure voltage, compare to theory</li>
-    <li><strong>Weeks 7–9:</strong> Add sensors and Arduino control, explore vertical orientation</li>
-    <li><strong>Weeks 10–11:</strong> Try vapor feed, fabricate custom MEA</li>
-    <li><strong>Weeks 12–13:</strong> Final optimizations and voltage tuning</li>
-    <li><strong>Week 14:</strong> Final presentation and documentation submission</li>
-  </ul>
-
-  <h3>Major Components</h3>
-  <ul>
-    <li>Commercial MEA with Pt-Ru anode and Pt cathode layers</li>
-    <li>Proton Exchange Membrane (Nafion)</li>
-    <li>Peristaltic pumps for methanol feed</li>
-    <li>Flow, temperature, and voltage sensors (Arduino-connected)</li>
-    <li>Option for vapor methanol feed via nitrogen bubbling (TBD)</li>
-  </ul>
-
-  <h3>Final Notes on Purchasing Strategy</h3>
-  <p>
-    We intentionally delayed purchasing vaporization equipment and sensors until testing our MVP, to ensure we don’t
-    invest prematurely in components that may not align with our final fuel strategy. Many of the parts we expect to find
-    locally in shared labs or through assistance from Dr. Huff.
-  </p>
-</section>
-
-
-  
-  <!-- Instructions Section -->
-  <section id="instructions">
+  <!-- Instructions -->
+  <section id="instructions" class="section">
     <h2>How to Build and Run the Setup</h2>
 
     <h3>Materials Used</h3>
     <ul>
-      <li>10-cell Direct Methanol Flex-Stak</li>
-      <li>Peristaltic pump (5V), silicone tubing</li>
-      <li>Arduino Uno, voltage & current sensors</li>
-      <li>1M methanol solution (prepared at 3% by weight)</li>
-      <li>Custom circuit with MOSFET & load resistor</li>
+      <li>10-cell Flex-Stak DMFC</li>
+      <li>Peristaltic pump, tubing, check valves</li>
+      <li>Arduino Uno + sensors (voltage, current, flow)</li>
+      <li>1M MeOH-water solution (3% by weight)</li>
+      <li>Custom control circuit with MOSFETs</li>
     </ul>
 
-    <h3>Setup Steps</h3>
+    <h3>Setup Instructions</h3>
     <ol>
-      <li>Assemble the DMFC stack and torque screws evenly (8–10 in-lbs).</li>
-      <li>Hydrate membrane with distilled water for 15 minutes.</li>
-      <li>Prepare and begin pumping 3% methanol solution at 100 cc/min.</li>
-      <li>Connect electrodes to Arduino-controlled data logging circuit.</li>
-      <li>Monitor voltage output over time and adjust flow rate as needed.</li>
+      <li>Assemble and torque stack (8–10 in-lbs)</li>
+      <li>Hydrate with DI water before feeding MeOH</li>
+      <li>Start MeOH flow at 100 cc/min</li>
+      <li>Connect sensors and power electronics</li>
+      <li>Begin Arduino logging and output analysis</li>
     </ol>
 
     <h3>System Diagram</h3>
-    <img src="assets/circuit_diagram.png" alt="Circuit Diagram" style="max-width: 90%;">
+    <img src="assets/circuit_diagram.png" alt="System Circuit Diagram" />
   </section>
 
-  <!-- Progress Section -->
-  <section id="progress">
+  <!-- Progress -->
+  <section id="progress" class="section">
     <h2>Progress Log</h2>
-    <p>We documented our progress daily. Key highlights:</p>
     <ul>
-      <li><strong>Feb:</strong> Initial design, ordering parts, literature review.</li>
-      <li><strong>March:</strong> Stack hydration tests, flow calibration, Arduino circuit prototyping.</li>
-      <li><strong>April:</strong> Full-stack testing, debugging, and data logging under various loads and feed concentrations.</li>
+      <li><strong>Feb:</strong> Design ideation, sourcing parts, timeline</li>
+      <li><strong>March:</strong> Hardware integration, calibration curves, first tests</li>
+      <li><strong>April:</strong> Full testing, control system development, data analysis</li>
     </ul>
 
     <details>
-      <summary>📋 View Full Progress Log</summary>
+      <summary>📋 Full Work Log</summary>
       <pre>
-<!-- Insert or paste formatted text log here -->
-{{PROGRESS_LOG_TEXT}}
+<!-- Paste progress log here -->
+{{PROGRESS_LOG_CONTENT}}
       </pre>
     </details>
 
-    <h3>Project Schedule (Gantt Chart)</h3>
-    <img src="assets/gantt_chart.png" alt="Gantt Chart" style="max-width: 100%;">
+    <h3>Gantt Chart</h3>
+    <img src="assets/gantt_chart.png" alt="Gantt Chart" />
   </section>
 
   <!-- Results -->
-  <section id="results">
+  <section id="results" class="section">
     <h2>Experimental Results</h2>
-
-    <p>Initial performance tests showed:</p>
     <ul>
-      <li>Voltage under load (10 cells, 50 mA/cm²): ~3.8V</li>
-      <li>Current: 4.5–5 A across 10 cm²/cell area</li>
-      <li>Power Output: ~19–30 W depending on flow rate and cell conditioning</li>
-      <li>Effluent MeOH concentration confirmed < 2% after 5 mins of steady-state</li>
+      <li>~3.8V at 50 mA/cm² (10 cells in series)</li>
+      <li>5 A total current, 19–30 W output</li>
+      <li>Low MeOH crossover at 1M</li>
+      <li>Increased crossover at >1.5M feed concentrations</li>
     </ul>
 
-    <h3>Power & I/V Curve</h3>
-    <img src="assets/power_iv_plot.png" alt="IV Curve" style="max-width: 100%;">
+    <h3>I-V and Power Curve</h3>
+    <img src="assets/power_iv_plot.png" alt="Power/IV Curve" />
 
-    <h3>Peristaltic Pump Calibration Curve</h3>
-    <img src="assets/calibration_curve.png" alt="Pump Calibration" style="max-width: 80%;">
+    <h3>Pump Calibration Curve</h3>
+    <img src="assets/calibration_curve.png" alt="Peristaltic Pump Calibration" />
   </section>
 
   <!-- Documents -->
-  <section id="documents">
+  <section id="documents" class="section">
     <h2>Reference Documents</h2>
     <ul>
-      <li><strong>Preliminary Design Report:</strong> Summary of early modeling, MeOH flow calculations, and system constraints.</li>
-      <li><strong>Data Sheets:</strong> <a href="assets/methanol_sds.pdf">Methanol SDS</a> | <a href="assets/hydrogen_sds.pdf">Hydrogen SDS</a></li>
-      <li><strong>Estimation Calculations:</strong> <a href="assets/charge_time_estimate.pdf">Fuel Usage & Battery Charge Time</a></li>
+      <li><strong>Preliminary Report:</strong> <a href="assets/DMFC_Prelim_Report.pdf" target="_blank">View PDF</a></li>
+      <li><strong>Methanol SDS:</strong> <a href="assets/methanol_sds.pdf" target="_blank">Safety Sheet</a></li>
+      <li><strong>Hydrogen SDS:</strong> <a href="assets/hydrogen_sds.pdf" target="_blank">Safety Sheet</a></li>
+      <li><strong>Charge Time Estimate:</strong> <a href="assets/charge_time_estimate.pdf" target="_blank">Energy Calculations</a></li>
     </ul>
-    <p>
-      See our full <a href="assets/DMFC_Prelim_Report.pdf" target="_blank">initial report</a> for details on redox reactions, Nernst calculations, and flow modeling.
-    </p>
   </section>
 
-  <!-- Team Section -->
-  <section id="team">
+  <!-- Team -->
+  <section id="team" class="section">
     <h2>Team</h2>
     <ul>
-      <li><strong>Karam Alkaissy</strong> – Arduino, system integration, sensor calibration</li>
-      <li><strong>Max Huang</strong> – Energy modeling, MeOH calculations, documentation</li>
-      <li><strong>Jack Leitzell</strong> – Hardware build, MEA research, optimization testing</li>
+      <li><strong>Karam Alkaissy</strong> – Arduino systems & integration</li>
+      <li><strong>Max Huang</strong> – Energy modeling, testing, documentation</li>
+      <li><strong>Jack Leitzell</strong> – Fuel cell hardware, MEA fabrication</li>
     </ul>
   </section>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2025 Methanol Dynamics | CBE 3300B | University of Pennsylvania</p>
   </footer>
 </body>
+</html>
+
