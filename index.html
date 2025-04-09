@@ -1,109 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMFC Project Overview</title>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#progress">Progress</a></li>
-                <li><a href="#documents">Documents</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Direct Methanol Fuel Cell Project</h1>
+    <p>University of Pennsylvania – CBE 3300B</p>
+    <nav>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#instructions">Instructions</a></li>
+        <li><a href="#progress">Progress Log</a></li>
+        <li><a href="#results">Data & Results</a></li>
+        <li><a href="#documents">Documents</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Project Overview -->
-    <section id="overview">
-        <h2>Project Overview</h2>
-        <p>
-            This project focuses on the development and optimization of a Direct Methanol Fuel Cell (DMFC) system.
-            Our goal is to design a high-efficiency DMFC that can reliably generate electrical energy from methanol
-            while minimizing methanol crossover and improving fuel utilization.
-        </p>
-        <p>
-            We are testing different operating conditions, including fuel concentration, feed rates, and geometric configurations.
-            Additionally, we aim to fabricate our own Membrane Electrode Assembly (MEA) to explore cost-effective alternatives.
-        </p>
-    </section>
+  <!-- Project Overview -->
+  <section id="overview">
+    <h2>Project Overview</h2>
+    <p>
+      Our project investigates the development of a direct methanol fuel cell (DMFC) system,
+      capable of charging a portable battery pack using methanol as a chemical energy source.
+      The project includes electrical, chemical, and mechanical integration to create a robust, testable prototype.
+    </p>
+    <p>
+      The system uses a 10-cell DMFC stack operating on 1M methanol feed solution, with performance monitored
+      through custom Arduino circuitry and sensors. We’ve also developed our own peristaltic calibration curve,
+      explored MeOH crossover behavior, and built active control systems for pump regulation.
+    </p>
+  </section>
 
-    <!-- Progress Section -->
-    <section id="progress">
-        <h2>Project Progress</h2>
-        <p>
-            We have successfully completed the initial setup of the fuel cell stack and achieved stable voltage output under controlled conditions.
-            The control system (using Arduino) is partially integrated, and early tests have shown promising results.
-        </p>
-        <p>
-            We are currently working on optimizing fuel delivery using peristaltic pumps and exploring the impact of different methanol concentrations on performance.
-        </p>
-        <img src="assets/gantt_chart.png" alt="Project Gantt Chart" style="max-width: 80%;">
-        <p><strong>Click <a href="assets/gantt_chart.pdf" target="_blank">here</a> to view the full Gantt chart.</strong></p>
-    </section>
+  <!-- Instructions Section -->
+  <section id="instructions">
+    <h2>Build and Run Instructions</h2>
+    <h3>Materials & Components</h3>
+    <ul>
+      <li>DMFC 10-cell stack (Fuel Cell Store Flex-Stak)</li>
+      <li>1M methanol-water solution (3% by weight MeOH)</li>
+      <li>Arduino Uno, breadboard, resistors, MOSFET</li>
+      <li>Peristaltic pump (3x5V configuration)</li>
+      <li>Flow meters, voltage/current sensors, and optional fan</li>
+    </ul>
 
-    <!-- Documents Section -->
-    <section id="documents">
-        <h2>Documents</h2>
-        <ul>
-            <li><a href="assets/initial_report.pdf" target="_blank">Initial Design Report</a></li>
-            <li><a href="assets/safety_sheet.pdf" target="_blank">Safety Data Sheet</a></li>
-            <li><a href="assets/progress_log.pdf" target="_blank">Progress Log</a></li>
-            <li><a href="assets/calibration_curve.pdf" target="_blank">Peristaltic Pump Calibration Curve</a></li>
-            <li><a href="assets/circuit_diagram.png" target="_blank">Circuit Diagram</a></li>
-        </ul>
-    </section>
+    <h3>Setup Procedure</h3>
+    <ol>
+      <li>Hydrate stack by flowing DI water for 15–20 mins.</li>
+      <li>Switch to 1M MeOH feed at 100 cc/min (adjust if needed).</li>
+      <li>Power up circuit and monitor real-time voltage.</li>
+      <li>Connect Arduino for data logging.</li>
+      <li>Use included code (see GitHub repo) for plotting power output.</li>
+    </ol>
 
-    <!-- Results Section -->
-    <section id="results">
-        <h2>Experimental Results</h2>
-        <p>
-            Our testing indicates that the fuel cell outputs approximately <strong>19W</strong> under 50 mA/cm² operating conditions, increasing to
-            <strong>~30W</strong> at 100 mA/cm². Methanol crossover remains within acceptable limits at 1M concentration.
-        </p>
-        <img src="assets/results_chart.png" alt="Performance Chart" style="max-width: 80%;">
-        <p><strong>Click <a href="assets/results_chart.pdf" target="_blank">here</a> to view the full data set.</strong></p>
-    </section>
+    <h3>Schematic</h3>
+    <p>Click to view: <a href="assets/circuit_diagram.png" target="_blank">Fuel Cell Circuit Diagram</a></p>
+  </section>
 
-    <!-- Team Section -->
-    <section id="team">
-        <h2>Team Members</h2>
-        <div class="team-member">
-            <img src="assets/karam.jpg" alt="Karam">
-            <p><strong>Karam Alkaissy</strong> – Circuitry and Research</p>
-        </div>
-        <div class="team-member">
-            <img src="assets/max.jpg" alt="Max">
-            <p><strong>Max Huang</strong> – Performance Optimization and Data Analysis</p>
-        </div>
-        <div class="team-member">
-            <img src="assets/jack.jpg" alt="Jack">
-            <p><strong>Jack Leitzell</strong> – Hardware, System Integration, and Controls</p>
-        </div>
-    </section>
+  <!-- Progress Log Section -->
+  <section id="progress">
+    <h2>Progress Log</h2>
+    <p>Click to view full log: <a href="assets/progress_log.txt" target="_blank">Progress Log (Full)</a></p>
+    <p><strong>Highlights:</strong></p>
+    <ul>
+      <li><strong>Feb 2025:</strong> Ordered parts, created schedule, began preliminary tests</li>
+      <li><strong>March:</strong> Calibrated pumps, built control circuitry, began DMFC testing</li>
+      <li><strong>April:</strong> Collected performance data, soldered circuits, tested with 3% MeOH</li>
+    </ul>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>
-            For more information or questions, please contact us at: 
-            <a href="mailto:maxhuang@sas.upenn.edu">methanoldynamics@fake.email.com</a>
-            or visit the 
-            <a href="https://github.com/maxhuangPENN/CBE3300-project-page" target="_blank">GitHub repository</a>.
-        </p>
-    </section>
+  <!-- Data & Results -->
+  <section id="results">
+    <h2>Experimental Data</h2>
+    <ul>
+      <li><a href="assets/calibration_curve.pdf" target="_blank">Peristaltic Pump Calibration Curve</a></li>
+      <li><a href="assets/output_data_tables.xlsx" target="_blank">Fuel Cell I/V and Power Output Tables</a></li>
+    </ul>
+    <p>
+      Under conservative operating conditions (50 mA/cm²), we achieved ~19W across the 10-cell stack.
+      With higher current densities (~100 mA/cm²), outputs approached 30W. Effluent concentration was verified at ~10%.
+    </p>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Methanol Dynamics. All Rights Reserved.</p>
-    </footer>
+  <!-- Documents Section -->
+  <section id="documents">
+    <h2>Documentation</h2>
+    <ul>
+      <li><a href="assets/DMFC_Prelim_Report.pdf" target="_blank">Preliminary Design Report</a></li>
+      <li><a href="assets/gantt_chart.pdf" target="_blank">Gantt Chart & Work Schedule</a></li>
+      <li><a href="assets/safety_sheet_methanol.pdf" target="_blank">Methanol SDS</a></li>
+      <li><a href="assets/safety_sheet_hydrogen.pdf" target="_blank">Hydrogen SDS</a></li>
+      <li><a href="assets/fuel_cell_estimations.pdf" target="_blank">Theoretical Estimations & Energy Analysis</a></li>
+    </ul>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team">
+    <h2>Meet the Team</h2>
+    <p>This project was completed by:</p>
+    <ul>
+      <li><strong>Karam Alkaissy</strong> – Electrical systems, Arduino control</li>
+      <li><strong>Max Huang</strong> – System modeling, testing, and documentation</li>
+      <li><strong>Jack Leitzell</strong> – Fluid system integration, MEA and power circuit design</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Methanol Dynamics Team | Built with ❤️ for CBE 3300B</p>
+  </footer>
 </body>
-</html>
+
 
