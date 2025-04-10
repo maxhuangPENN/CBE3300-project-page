@@ -15,7 +15,6 @@
       <ul>
         <li><a href="#overview">Overview</a></li>
         <li><a href="#context">Background</a></li>
-        <li><a href="#report">Design Report</a></li>
         <li><a href="#instructions">Instructions</a></li>
         <li><a href="#progress">Progress</a></li>
         <li><a href="#results">Results</a></li>
@@ -96,43 +95,10 @@
     </ul>
   </section>
 
-  <!-- Preliminary Design Report Sections 1–5 -->
-  <section id="report" class="section">
-    <h2>Design Report (Sections 1–5)</h2>
-
-    <h3>1. Physical/Chemical Outline of Methanol Fuel Cell Operation (Jack)</h3>
-    <p>The combustion of methanol is an exothermic, thermodynamically favorable process. The idea behind a methanol fuel cell is to direct the free energy released through this reaction into driving the flow of electrons, rather than being merely released as heat...</p>
-    <p>[Full text continues here – see previous reply to insert in full]</p>
-
-    <h3>2. Preliminary Calculations (Karam)</h3>
-    <p>Nernst Equation: <code>E = E₀ − (RT/nF) * ln(Q)</code></p>
-    <p>Where: E₀ = 1.20V, T = 298K, n = 6, F = Faraday's Constant, Q = ([CO₂] * [H₂O]²) / ([CH₃OH] * [O₂]³ᐟ²)</p>
-    <p>Efficiency assumed = 40%, leading to a practical voltage of ~0.48 V per cell → 4–6V total</p>
-
-    <h3>3. Cost of Parts</h3>
-    <ul>
-      <li>MEA: Nafion, 4 mg/cm² Pt-Ru (anode) and Pt Black (cathode), ~$170</li>
-      <li>Current Collectors: ~$30 each</li>
-      <li>Other: Tubing, sensors, Arduino, power management circuitry</li>
-    </ul>
-
-    <h3>4. Purchasing Strategy</h3>
-    <p>Initial components focus on basic function. Optimization components (vapor feed system, advanced sensors) will be purchased after MVP is proven. Many items will be sourced from Towne building labs or on recommendation from instructors.</p>
-
-    <h3>5. Prototyping Approach</h3>
-    <p>We will first pursue a liquid-fed, passively controlled system. Once voltage is achieved, we will explore:</p>
-    <ul>
-      <li>Active feed + sensor-controlled loops</li>
-      <li>Vapor feed via nitrogen bubbling</li>
-      <li>Stack orientation comparisons</li>
-      <li>Custom MEA fabrication</li>
-    </ul>
-    <p>Voltage goal: 5V, capable of battery charging.</p>
-  </section>
-
   <!-- Instructions -->
   <section id="instructions" class="section">
     <h2>How to Build and Run the Setup</h2>
+
     <h3>Materials Used</h3>
     <ul>
       <li>10-cell Flex-Stak DMFC</li>
@@ -141,6 +107,7 @@
       <li>1M MeOH-water solution (3% by weight)</li>
       <li>Custom control circuit with MOSFETs</li>
     </ul>
+
     <h3>Setup Instructions</h3>
     <ol>
       <li>Assemble and torque stack (8–10 in-lbs)</li>
@@ -149,6 +116,7 @@
       <li>Connect sensors and power electronics</li>
       <li>Begin Arduino logging and output analysis</li>
     </ol>
+
     <h3>System Diagram</h3>
     <img src="assets/circuit_diagram.png" alt="System Circuit Diagram" />
   </section>
@@ -161,10 +129,15 @@
       <li><strong>March:</strong> Hardware integration, calibration curves, first tests</li>
       <li><strong>April:</strong> Full testing, control system development, data analysis</li>
     </ul>
+
     <details>
       <summary>📋 Full Work Log</summary>
-      <pre>{{PROGRESS_LOG_CONTENT}}</pre>
+      <pre>
+<!-- Paste progress log here -->
+{{PROGRESS_LOG_CONTENT}}
+      </pre>
     </details>
+
     <h3>Gantt Chart</h3>
     <img src="assets/gantt_chart.png" alt="Gantt Chart" />
   </section>
@@ -178,10 +151,12 @@
       <li>Low MeOH crossover at 1M</li>
       <li>Increased crossover at >1.5M feed concentrations</li>
     </ul>
+
     <h3>I-V and Power Curve</h3>
     <img src="assets/power_iv_plot.png" alt="Power/IV Curve" />
+
     <h3>Pump Calibration Curve</h3>
-    <img src="calibration-curve.png" alt="Calibration Curve" style="max-width: 45%;" />
+    <img src="calibration curve.png" alt="Calibration Curve" style="max-width: 45%;">
   </section>
 
   <!-- Documents -->
@@ -202,6 +177,7 @@
       <li><strong>Karam Alkaissy</strong></li>
       <li><strong>Max Huang</strong></li>
       <li><strong>Jack Leitzell</strong></li>
+      
     </ul>
   </section>
 
