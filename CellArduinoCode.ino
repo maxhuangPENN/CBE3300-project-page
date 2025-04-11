@@ -1,7 +1,7 @@
 int pwmPin = 3; // Digital output pin connected to BJT base (via resistor)
 int analogPin = A0; // Analog input pin
 
-float timer = 0;
+int timer = 0;
 
 
 // Set your desired PWM parameters
@@ -10,7 +10,7 @@ float targetFlowrate = 100;  // Set your target flowrate in cc/min
 int pwmPeriodMs = 10;        // Total PWM period in milliseconds (e.g., 10ms = 100Hz)
 
 // Define a boolean called 'feedback' and a target voltage
-boolean feedback = true;  // Set to true to enable the feedback block
+boolean feedback = false;  // Set to true to enable the feedback block
 float targetCellVoltage = 4;  // Set your target flowrate in cc/min
 
 
