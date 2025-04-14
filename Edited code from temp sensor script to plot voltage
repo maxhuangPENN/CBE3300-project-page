@@ -1,0 +1,164 @@
+import processing.serial.*;
+import java.util.ArrayList;
+import java.io.PrintWriter;
+
+// Serial connection
+Serial myPort;
+
+// Data storage
+ArrayList<Float> cellVoltageData = new ArrayList<Float>(); // Measured voltage data
+ArrayList<Float> refVoltageData = new ArrayList<Float>();    // Reference (or set) voltage data 
+ArrayList<Float> voltageStoredValues = new ArrayList<Float>(); // Store measured voltage for CSV
+ArrayList<Float> refStoredValues = new ArrayList<Float>();      // Store reference voltage for CSV
+ArrayList<Float> timeData = new ArrayList<Float>(); // Store time values for CSV
+
+// Time variables
+int interval = 5; // Data collection interval in seconds
+int counter = 0;
+
+// Voltage range settings (adjust based on expected sensor output)
+float minValue = 0;
+float maxValue = 5;
+
+void setup() {
+  size(600, 400);
+
+  // Setup serial communication
+  println(Serial.list());
+  String portName = Serial.list()[3]; // Choose the correct port as needed
+  myPort = new Serial(this, portName, 9600);
+  myPort.clear(); // Clear the serial buffer at startup
+  myPort.bufferUntil('\n'); // Read until newline
+  
+  // Initialize plot background
+  background(255);
+  println("Serial port connected: " + portName);
+}
+
+void draw() {
+  // Call drawPlot() after a fixed interval
+  if (frameCount % (60 * interval) == 0) {
+    requestDataFromController();
+    drawPlot();
+    delay(3000); // 3-second delay after plotting
+  }
+}
+
+// Function to request and process data from the voltage controller
+void requestDataFromController() {
+  // Send the command to request the voltage readings
+  myPort.write(":010347000002B3\r\n"); 
+  delay(1000); // Wait 1 second after sending the command
+
+  // Wait for the response from the serial port
+  String response = myPort.readStringUntil('\n');
+  delay(1000); 
+
+  if (response != null) {
+    response = trim(response);
+  
+    // println("Received data: " + response);
+
+    try {
+      // Parse the response and extract cell voltage and reference voltage.
+      // Adjust these indices if the sensor response format has changed.
+      String cellHex = response.substring(7, 11);
+      String refHex  = response.substring(11, 15);
+
+      // Convert from hexadecimal to voltage; update the conversion factor as needed.
+      float cellVoltage = hexToVoltage(cellHex);
+      float refVoltage  = hexToVoltage(refHex);
+
+      // Add the voltage values to their respective buffers
+      addData(cellVoltage, refVoltage);
+      
+      // Save the current time (in seconds)
+      timeData.add((float)(counter * interval));
+      counter++;
+
+      // Store values for CSV export later
+      voltageStoredValues.add(cellVoltage);
+      refStoredValues.add(refVoltage);
+    } catch (Exception e) {
+      println("Error parsing data: " + e);
+    }
+  }
+}
+
+// Convert hexadecimal string to voltage (V)
+float hexToVoltage(String hexString) {
+  int value = int(unhex(hexString));
+  // Example conversion: assuming a 10-bit ADC with 5V reference
+  return value * (5.0 / 1023.0);
+}
+
+// Add new data points for measured and reference voltage
+void addData(float voltage, float refVoltage) {
+  cellVoltageData.add(voltage);
+  refVoltageData.add(refVoltage);
+  
+  // Maintain a rolling window of the last 100 points for smoother plotting
+  if (cellVoltageData.size() > 100) {
+    cellVoltageData.remove(0);
+    refVoltageData.remove(0);
+  }
+}
+
+// Draw the plot with a fixed y-axis (voltage range) and a dynamic x-axis
+void drawPlot() {
+  background(255);
+
+  // Plot measured cell voltage
+  stroke(0);
+  noFill();
+  beginShape();
+  for (int i = 0; i < cellVoltageData.size(); i++) {
+    float x = map(i, 0, cellVoltageData.size() - 1, 0, width);
+    float y = map(cellVoltageData.get(i), minValue, maxValue, height, 0);
+    vertex(x, y);
+  }
+  endShape();
+
+  // Plot reference voltage (if applicable) in red
+  stroke(255, 0, 0);
+  beginShape();
+  for (int i = 0; i < refVoltageData.size(); i++) {
+    float x = map(i, 0, refVoltageData.size() - 1, 0, width);
+    float y = map(refVoltageData.get(i), minValue, maxValue, height, 0);
+    vertex(x, y);
+  }
+  endShape();
+
+  // Add legend / labels
+  fill(0);
+  text("Cell Voltage (V)", 20, 20);
+  fill(255, 0, 0);
+  text("Reference Voltage (V)", 20, 40);
+}
+
+// Save data to a CSV file when the program is closed
+void exit() {
+  saveData();
+  super.exit();
+}
+
+// Save the collected data (time, cell voltage, reference voltage) to a CSV file
+void saveData() {
+  String timestamp = year() + nf(month(), 2) + nf(day(), 2) + "-" + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
+  String fileName = sketchPath("data-" + timestamp + ".csv");
+
+  PrintWriter output = createWriter(fileName);
+  
+  // Write CSV headers
+  output.println("Time (s), Cell Voltage (V), Reference Voltage (V)");
+
+  // Write data
+  for (int i = 0; i < voltageStoredValues.size(); i++) {
+    output.println(timeData.get(i) + "," + voltageStoredValues.get(i) + "," + refStoredValues.get(i));
+  }
+
+  output.flush();
+  output.close();
+
+  println("Data saved to " + fileName);
+}
