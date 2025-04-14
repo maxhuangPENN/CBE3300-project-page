@@ -25,7 +25,7 @@ void setup() {
 
   // Setup serial communication
   println(Serial.list()); // List all available ports
-  String portName = Serial.list()[3]; // Choose the correct port from the list (adjust index as needed)
+  String portName = Serial.list()[0]; // Choose the correct port from the list (adjust index as needed)
   myPort = new Serial(this, portName, 9600);
   myPort.clear(); // Clear the serial buffer at startup
   myPort.bufferUntil('\n'); // Read until newline
@@ -40,7 +40,7 @@ void draw() {
   if (frameCount % (60 * interval) == 0) {
     requestDataFromController();
     drawPlot();
-    delay(3000); // 3-second delay after plotting
+    delay(1000); // 3-second delay after plotting
   }
 }
 
@@ -48,7 +48,7 @@ void draw() {
 void requestDataFromController() {
   // Send the command to request Process Value (PV) and Set Value (SV)
   myPort.write(":010347000002B3\r\n"); // Same command as in the Python script
-  delay(1000); // Wait 1 second after sending the command
+  delay(500); // Wait 1 second after sending the command
 
   // Wait for the response (read from the serial port)
   String response = myPort.readStringUntil('\n');
@@ -57,16 +57,21 @@ void requestDataFromController() {
   // Check if response is valid and process it
   if (response != null) {
     response = trim(response);
-    //println("Received data: " + response); // Print the raw data to verify it's being received
+    println("Received data: " + response); // Print the raw data to verify it's being received
 
     try {
       // Parse the response and extract PV and SV
-      String pvHex = response.substring(7, 11);
-      String svHex = response.substring(11, 15);
-
+      //String pvHex = response.substring(0,3);
+      String pvHex = response;
+      
+      //println(pvHex); // List all available ports
+      //String svHex = response.substring(11, 15);
+      // Convert from decimal to float values
+      float pvValue = Float.parseFloat(pvHex);  // Parse as a decimal float
       // Convert from hexadecimal to integer and then to Centigrade
-      float pvValue = hexToCentigrade(pvHex);
-      float svValue = hexToCentigrade(svHex);
+      //float pvValue = hexToCentigrade(pvHex);
+      //float svValue = hexToCentigrade(svHex);
+      float svValue = 4;
 
       // Add the process value (PV) and set value (SV) to their respective buffers
       addData(pvValue, svValue);
