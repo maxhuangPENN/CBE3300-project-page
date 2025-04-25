@@ -1,0 +1,52 @@
+// ================================
+// Arduino Code for DMFC Feedback Loop
+// ================================
+
+int pwmPin = 3;         // PWM output pin to BJT base
+int analogPin = A0;     // Voltage input from fuel cell
+
+float dutyCycle = 0.5;  // Default duty cycle (50%)
+int pwmPeriodMs = 10;
+
+float targetCellVoltage = 4.0;
+int timer = 0;
+bool feedback = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pwmPin, OUTPUT);
+  pinMode(analogPin, INPUT);
+}
+
+void loop() {
+  int onTime = pwmPeriodMs * dutyCycle;
+  int offTime = pwmPeriodMs - onTime;
+
+  // Read cell voltage
+  int sensorValue = analogRead(analogPin);
+  float voltage = 4 * sensorValue * (5.0 / 1023.0);
+  Serial.println(voltage);  // Send to Processing
+
+  // PWM control
+  digitalWrite(pwmPin, HIGH);
+  delay(onTime);
+  digitalWrite(pwmPin, LOW);
+  delay(offTime);
+
+  // Receive updated duty cycle from Processing
+  if (Serial.available()) {
+    String input = Serial.readStringUntil('\n');
+    if (input.startsWith("SET:")) {
+      float received = input.substring(4).toFloat();
+      dutyCycle = constrain(received, 0.0, 1.0);
+    }
+  }
+
+  // Optional feedback loop
+  if (feedback && timer % 1000 == 0) {
+    if (voltage > targetCellVoltage + 0.1) dutyCycle -= 0.01;
+    else if (voltage < targetCellVoltage - 0.1) dutyCycle += 0.01;
+  }
+
+  timer += pwmPeriodMs;
+}
