@@ -1,0 +1,75 @@
+Outline: Methanol Fuel Cell Project Report
+
+1. Executive Summary
+Brief overview of project goals, methods, challenges, and outcomes
+
+2. Introduction
+Importance of portable fuel cells
+Global methanol fuel cell market outlook​
+Motivation for selecting methanol as fuel
+
+3. Background and Market Context
+Overview of methanol fuel cell technology
+SWOT Analysis (Strengths, Weaknesses, Opportunities, Threats)​
+Competitor analysis:
+SFC Energy (EMILY3000)
+Blue World Technologies​
+
+Target market strategy:
+Recreational, defense, and off-grid applications​
+
+4. Design Process Overview
+Timeline and project management approach (Gantt chart and GitHub log)​
+Initial conceptual design
+Final design updates and iterations​
+
+5. Final System Architecture
+Circuitry design:
+Voltage, current, and power targets​
+Efficiency goals vs. actual performance
+Arduino scripting and MOSFET control​
+Feed system:
+Methanol concentration and flow rate calculations​
+Air feed system challenges
+Pump and casing design:
+Pump specifications and casing modifications​
+
+6. Chemical Engineering Principles Applied
+Mass and energy balance for fuel and airflow systems​
+Chemical process safety: handling toxic methanol​
+Reaction kinetics (basic) and electrochemistry of methanol oxidation
+System integration and heat/mass transfer considerations
+
+7. Challenges Faced
+Voltage instability and low efficiency (only ~33%)​
+Air feed limitations: inability to confirm air as limiting factor​
+Occasional transistor failures ("fried" MOSFETs)​
+Low current delivery suggesting low methanol conversion​
+
+8. Skills Acquired
+Practical skills:
+Arduino script programming
+Soldering and electrical circuit assembly​
+System-level engineering:
+Integration of electronics, fluid mechanics, and chemical processes
+Project management and documentation
+
+9. Future Recommendations
+Explore pumps with adjustable flow rates to eliminate Arduino modulation​
+Upgrade MOSFETs to efficient DC-DC converters
+Redesign air delivery system for controllable and measurable airflow
+Improve casing modularity and thermal management
+
+10. Conclusion
+Reflections on final system performance
+Lessons learned about applied chemical engineering in real-world fuel cell systems
+Broader implications for fuel cell commercialization and sustainability
+
+11. References
+Cite sources for market data, fuel cell principles, safety guidelines, and competitor info (e.g., BCC Research link provided​, textbooks, safety data sheets)
+
+Notes:
+Aim for about 1.5–2 pages per major section.
+Section 5 (Final System Architecture) and Section 6 (ChemE Principles) should be the longest parts (~5–6 pages combined).
+Diagrams from your slides (e.g., fuel cell layout, circuitry, Gantt chart) should be included to stretch content appropriately.
+
