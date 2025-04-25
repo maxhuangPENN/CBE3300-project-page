@@ -24,7 +24,7 @@ void setup() {
   
   Serial.begin(9600);
   // Calculate duty cycle
-  dutyCycle = targetFlowrate / 142.0;
+  dutyCycle = targetFlowrate / 254.8;
   if (dutyCycle > 1.0) dutyCycle = 1.0; // Limit to 100%
   pinMode(pwmPin, OUTPUT);
   pinMode(analogPin, INPUT);
