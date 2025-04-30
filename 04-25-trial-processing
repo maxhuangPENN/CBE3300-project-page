@@ -11,9 +11,10 @@ int maxPoints = 300;
 float minV = 0;
 float maxV = 6;
 
-String inputBuffer = "";
-float targetVoltage = 4.0;
-float dutyCycle = 0.5;
+float targetChargeTime = 4.0; // in hours
+float batteryWh = 80.0;       // battery energy requirement
+float pumpVoltage = 9.0;      // placeholder, derived later
+float dutyCycle = 0.5;        // derived from voltage
 
 Button toggleButton;
 TextField inputField;
@@ -22,7 +23,7 @@ Button sendButton;
 void setup() {
   size(900, 600);
   println(Serial.list());
-  String portName = Serial.list()[0]; // Adjust index if needed
+  String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil('\n');
 
@@ -31,7 +32,7 @@ void setup() {
   output.println("Time (s),Voltage (V)");
 
   toggleButton = new Button("Pause", width - 120, 20, 80, 30);
-  sendButton = new Button("Set Target", 400, 550, 100, 30);
+  sendButton = new Button("Set Time", 400, 550, 100, 30);
   inputField = new TextField(250, 550, 130, 30);
 }
 
@@ -110,10 +111,24 @@ void mousePressed() {
 
   if (sendButton.isClicked(mouseX, mouseY)) {
     try {
-      float entered = float(inputField.text);
-      dutyCycle = constrain(entered, 0.0, 1.0);
-      myPort.write("SET:" + dutyCycle + "\n");
-      println("Sent new duty cycle: " + dutyCycle);
+      float enteredTime = float(inputField.text);
+      targetChargeTime = constrain(enteredTime, 0.5, 24.0);
+      float powerNeeded = batteryWh / targetChargeTime; // in W
+
+      // Estimate required flow rate (based on 170 W per 100 cc/min from PDF)
+      float flowRate = (powerNeeded / 170.0) * 100.0; // in cc/min
+
+      // Convert flowRate to voltage: Assume linear relation V = (flow + b) / a
+      float a = 0.2758; // from your plot
+      float b = 0.7036;
+      pumpVoltage = (flowRate / 60.0 + b) / a; // convert cc/min to mL/s first
+
+      // Convert voltage to duty cycle (assume 5–12 V range maps to 0–1 duty cycle)
+      dutyCycle = constrain((pumpVoltage - 5.0) / (12.0 - 5.0), 0.0, 1.0);
+
+      myPort.write("SET:" + nf(dutyCycle, 1, 3) + "\n");
+      println("Target time: " + targetChargeTime + " h → Power: " + powerNeeded + " W → Flow: " + nf(flowRate, 1, 1) + " cc/min → Voltage: " + nf(pumpVoltage, 1, 2) + " V → Duty Cycle: " + nf(dutyCycle, 1, 2));
+
     } catch (Exception e) {
       println("Invalid input.");
     }
