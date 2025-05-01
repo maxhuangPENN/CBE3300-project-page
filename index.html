@@ -10,9 +10,9 @@
       margin: 0;
       padding: 0;
       display: flex;
-      background: #f9f9f9;
+      background: #f0f4f8;           /* very light background for contrast */
       font-family: Georgia, serif;
-      color: #333;
+      color: #001f3f;               /* dark navy text */
     }
 
     /* Fixed left‐hand navigation pane */
@@ -22,7 +22,7 @@
       left: 0;
       width: 200px;
       height: 100vh;
-      background: #fff;
+      background: #001f3f;           /* navy background */
       padding: 1em;
       box-shadow: 2px 0 4px rgba(0,0,0,0.1);
       overflow-y: auto;
@@ -38,29 +38,29 @@
     nav.toc a {
       display: block;
       padding: 0.5em 1em;
-      color: #333;
+      color: #ffffff;                /* white links */
       text-decoration: none;
       font-weight: 600;
       border-radius: 4px;
       transition: background 0.2s, color 0.2s;
     }
     nav.toc a:hover {
-      background: #f0f0f0;
-      color: #000;
+      background: #003366;           /* darker navy on hover */
+      color: #ffffff;
     }
 
     /* Main content area */
     main {
       flex: 1;
-      margin-left: 200px;  /* make room for nav */
+      margin-left: 200px;            /* make room for nav */
       display: flex;
       justify-content: center;
       padding: 2em;
     }
     .container {
-      width: 80%;          /* wider text block */
+      width: 80%;
       max-width: 900px;
-      background: #fff;
+      background: #ffffff;           /* white background */
       padding: 2em;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -70,40 +70,52 @@
       text-align: center;
       font-size: 2em;
       margin-bottom: 0.5em;
+      color: #001f3f;
     }
     h2 {
       font-size: 1.75em;
       margin-top: 1.5em;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 2px solid #ccc;
       padding-bottom: 0.2em;
+      color: #001f3f;
     }
     h3 {
       font-size: 1.4em;
       margin-top: 1em;
+      color: #001f3f;
     }
     p, ul, ol {
       margin-bottom: 1em;
       line-height: 1.6;
+      color: #001f3f;
     }
     ul, ol {
       padding-left: 1.5em;
+    }
+    a {
+      color: #001f3f;                /* navy links in body */
+    }
+    a:hover {
+      text-decoration: underline;
     }
     .equation {
       display: block;
       text-align: center;
       font-family: 'Courier New', monospace;
-      background: #f4f4f4;
+      background: #e8eef4;           /* very light blue background */
       padding: 0.5em;
       margin: 1em 0;
-      border-left: 3px solid #ccc;
+      border-left: 3px solid #001f3f;
+      color: #001f3f;
     }
     pre {
       white-space: pre-wrap;
       font-family: 'Courier New', monospace;
-      background: #f4f4f4;
+      background: #e8eef4;
       padding: 0.5em;
       margin: 1em 0;
-      border-left: 3px solid #ccc;
+      border-left: 3px solid #001f3f;
+      color: #001f3f;
     }
     ol.references {
       list-style-type: decimal;
@@ -142,7 +154,7 @@
     <div class="container">
       <header>
         <h1>CBE 3300B:<br>Direct Methanol Fuel Cell (DMFC)</h1>
-        <p style="text-align: center; font-size: 1.25em;">
+        <p style="text-align:center; font-size:1.25em; color:#001f3f;">
           <strong>Methanol Dynamics &amp; Co. LLP (Max, Jack, Karam)</strong><br>
           Spring 2025<br>
           Chemical and Biomolecular Engineering<br>
@@ -419,7 +431,7 @@
         <img src="IMG_6256.jpg" alt="Circuit Diagram" style="max-width: 45%;" />
         <p>
           <strong>Setup Demo Video:</strong>
-          <a href="https://www.youtube.com/watch?v=CbhEQC6FZ3c&ab_channel=Jack" target="_blank" rel="noopener">
+          <a href="https://youtu.be/CbhEQC6FZ3c?si=o1pequK2wXnx27N7&t=8" target="_blank" rel="noopener">
             Watch on YouTube
           </a>
         </p>
