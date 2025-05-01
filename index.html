@@ -3,23 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CBE 3300b: Direct Methanol Fuel Cell (DMFC)</title>
+  <title>CBE 3300B: Direct Methanol Fuel Cell (DMFC)</title>
   <style>
+    /* Reset & base */
     body {
-      background: #f9f9f9;
       margin: 0;
       padding: 0;
+      display: flex;
+      background: #f9f9f9;
       font-family: Georgia, serif;
       color: #333;
     }
+
+    /* Fixed left‐hand navigation pane */
+    nav.toc {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background: #fff;
+      padding: 1em;
+      box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+    nav.toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav.toc li {
+      margin: 0.5em 0;
+    }
+    nav.toc a {
+      display: block;
+      padding: 0.5em 1em;
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav.toc a:hover {
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    /* Main content area */
+    main {
+      flex: 1;
+      margin-left: 200px;  /* make room for nav */
+      display: flex;
+      justify-content: center;
+      padding: 2em;
+    }
     .container {
-      width: 50%;
-      max-width: 800px;
-      margin: 2em auto;
+      width: 80%;          /* wider text block */
+      max-width: 900px;
       background: #fff;
       padding: 2em;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
+    /* Typography */
     h1 {
       text-align: center;
       font-size: 2em;
@@ -75,13 +121,38 @@
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>CBE 3300B:<br>Direct Methanol Fuel Cell (DMFC)</h1>
+  <!-- Left‐side navigation pane (always visible) -->
+  <nav class="toc">
+    <ul>
+      <li><a href="#introduction">1 Introduction</a></li>
+      <li><a href="#electrochemical-operation">2 Electrochemical Operation</a></li>
+      <li><a href="#prototyping-approach">3 Prototyping Approach</a></li>
+      <li><a href="#project-timeline">4 Project Timeline</a></li>
+      <li><a href="#preliminary-calculations">5 Preliminary Calculations</a></li>
+      <li><a href="#purchasing-list">6 Purchasing List</a></li>
+      <li><a href="#tracking-progress">7 Tracking Progress</a></li>
+      <li><a href="#experimental-results">8 Experimental Results</a></li>
+      <li><a href="#reference-documents">9 Reference Documents</a></li>
+      <li><a href="#references">10 References</a></li>
+    </ul>
+  </nav>
 
-      <p style="text-align: center; font-size: 1.25em"><strong>Methanol Dynamics &amp; Co. LLP (Max, Jack, Karam)</strong><br>
-         Spring 2025</p>
-    </header>
+  <!-- Main content area, centered -->
+  <main>
+    <div class="container">
+      <header>
+        <h1>CBE 3300B:<br>Direct Methanol Fuel Cell (DMFC)</h1>
+        <p style="text-align: center; font-size: 1.25em;">
+          <strong>Methanol Dynamics &amp; Co. LLP (Max, Jack, Karam)</strong><br>
+          Spring 2025<br>
+          Chemical and Biomolecular Engineering<br>
+          University of Pennsylvania
+        </p>
+      </header>
+
+
+
+
 
     <!-- 1. Introduction -->
 
@@ -107,7 +178,7 @@
       <!-- Centered membrane image -->
       <img src="membrane-image.png" alt="Proton Exchange Membrane" 
             style="display: block; margin: 1.5em auto; max-width: 80%;">
-            
+
       <h3>&nbsp;Anode Reaction: Methanol Oxidation</h3>
       <p>At the anode, methanol (CH<sub>3</sub>OH) and water (H<sub>2</sub>O) undergo oxidation in the presence of a catalyst, typically platinum (Pt) or platinum–ruthenium (Pt–Ru). This reaction results in the formation of carbon dioxide (CO<sub>2</sub>), protons (H<sup>+</sup>), and electrons (e<sup>−</sup>):</p>
       <div class="equation">
@@ -353,10 +424,17 @@
           </a>
         </p>
       </section>
-  
-      <!-- 9. Reference Documents -->
+
+
+    <!-- 9. Reference Documents -->
       <section id="reference-documents">
         <h2>9&nbsp;Reference Documents</h2>
+        <p>
+          To support the design, prototyping, and safety considerations for our DMFC system, we draw on four key documents.  
+          The <strong>Preliminary Report</strong> lays out the background, electrochemical principles, and step-by-step prototyping approach (referenced in Sections 1–3).  
+          The <strong>Methanol SDS</strong> and <strong>Hydrogen SDS</strong> provide critical safety, handling, and storage information for our fuels (used to inform Section 6).  
+          Finally, the <strong>Charge time estimate</strong> contains all of our power-and-fuel calculations—linking chemical energy to electrical output and efficiency predictions (detailed in Section 5).
+        </p>
         <ul>
           <li><strong>Preliminary Report:</strong> <a href="DMFC_Prelim_Report_ Final_FinalFR.pdf" target="_blank">View PDF</a></li>
           <li><strong>Methanol SDS:</strong> <a href="methanol-sds.pdf" target="_blank">Safety Sheet</a></li>
@@ -364,6 +442,7 @@
           <li><strong>Charge Time Estimate:</strong> <a href="CBE_3300_Power_estimates.pdf" target="_blank">Energy Calculations</a></li>
         </ul>
       </section>
+  
   
       <!-- 10. References -->
       <section id="references">
@@ -417,11 +496,36 @@
               https://www.amazon.com/Methanol-Science-Engineering-Angelo-Basile/dp/0444639039
             </a>
           </li>
+          <li>
+            Direct methanol fuel cells system – A review of dual-role electrocatalysts for oxygen reduction and methanol oxidation.  
+            <a href="https://www.sciencedirect.com/science/article/pii/S258891332500002X" target="_blank" rel="noopener">
+              https://www.sciencedirect.com/science/article/pii/S258891332500002X
+            </a>
+          </li>
+          <li>
+            Vapor-feed direct methanol fuel cells using pure methanol.  
+            <a href="https://www.sciencedirect.com/science/article/pii/S2590174524002241" target="_blank" rel="noopener">
+              https://www.sciencedirect.com/science/article/pii/S2590174524002241
+            </a>
+          </li>
+          <li>
+            Direct methanol fuel cells parameter identification with enhanced performance.  
+            <a href="https://www.sciencedirect.com/science/article/pii/S2590174525001515" target="_blank" rel="noopener">
+              https://www.sciencedirect.com/science/article/pii/S2590174525001515
+            </a>
+          </li>
+          <li>
+            Machine learning-guided design of direct methanol fuel cells with advanced catalysts.  
+            <a href="https://www.sciencedirect.com/science/article/pii/S0378775324017105" target="_blank" rel="noopener">
+              https://www.sciencedirect.com/science/article/pii/S0378775324017105
+            </a>
+          </li>
         </ol>
       </section>
+
   
       <footer>
-        &copy; 2025 Methanol Dynamics &amp; Company LLP — Preliminary Design Report
+        &copy; 2025 Methanol Dynamics &amp; Co. LLP
       </footer>
     </div>
   
