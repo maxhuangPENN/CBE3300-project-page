@@ -3,195 +3,350 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DMFC Project – Methanol Dynamics</title>
-  <link rel="stylesheet" href="assets/styles.css" />
+  <title>CBE 3300b: Direct Methanol Fuel Cell (DMFC)</title>
+  <style>
+    body {
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      font-family: Georgia, serif;
+      color: #333;
+    }
+    .container {
+      width: 50%;
+      max-width: 800px;
+      margin: 2em auto;
+      background: #fff;
+      padding: 2em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      font-size: 1.75em;
+      margin-top: 1.5em;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.2em;
+    }
+    h3 {
+      font-size: 1.4em;
+      margin-top: 1em;
+    }
+    p, ul, ol {
+      margin-bottom: 1em;
+      line-height: 1.6;
+    }
+    ul, ol {
+      padding-left: 1.5em;
+    }
+    .equation {
+      display: block;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      background: #f4f4f4;
+      padding: 0.5em;
+      margin: 1em 0;
+      border-left: 3px solid #ccc;
+    }
+    pre {
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      background: #f4f4f4;
+      padding: 0.5em;
+      margin: 1em 0;
+      border-left: 3px solid #ccc;
+    }
+    ol.references {
+      list-style-type: decimal;
+      padding-left: 1.5em;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 2em;
+      border-top: 1px solid #ddd;
+      padding-top: 1em;
+    }
+  </style>
 </head>
-
 <body>
-  <header class="site-header">
-    <h1>Direct Methanol Fuel Cell (DMFC) Project</h1>
-    <p>University of Pennsylvania – CBE 3300B</p>
-    <nav class="site-nav">
+
+  <div class="container">
+    <header>
+      <h1>CBE 3300B:<br>Direct Methanol Fuel Cell (DMFC)</h1>
+
+      <p style="text-align: center; font-size: 1.25em"><strong>Methanol Dynamics &amp; Co. LLP (Max, Jack, Karam)</strong><br>
+         Spring 2025</p>
+    </header>
+
+    <!-- 1. Introduction -->
+
+    <section id="introduction">
+      <h2>1&nbsp;Introduction</h2>
+      <p>
+        This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on a 3% methanol solution (~1 M), and is designed to produce sufficient voltage and current to charge a 10,000 mAh battery pack.
+      </p>
+      <p>
+        Our prototype integrates fluid control (via peristaltic pumping), real-time monitoring (via Arduino and sensors), and electrical circuitry for power conditioning, and the design and iteration of feedback loops. We aim to validate theoretical predictions of fuel consumption, current density (~50–100 mA/cm²), and overall efficiency (~20–40%).
+      </p>
+      <p>
+        Key design constraints include controlling battery charge time through user input, maximizing fuel cell power output, designing a dynamic circuitry for live readings and active feedback, and minimizing methanol crossover.
+      </p>
+    </section>
+
+    <!-- 2. Electrochemical Operation -->
+    <section id="electrochemical-operation">
+      <h2>2&nbsp;Electrochemical Operation of a Direct Methanol Fuel Cell (DMFC)</h2>
+      <p>The direct methanol fuel cell (DMFC) is an electrochemical device that converts the chemical energy of methanol into electrical energy through redox reactions. Unlike combustion, which releases energy primarily as heat, the DMFC harnesses this energy to drive electron flow, producing electricity in a controlled manner.</p>
+
+      <h3>&nbsp;Anode Reaction: Methanol Oxidation</h3>
+      <p>At the anode, methanol (CH<sub>3</sub>OH) and water (H<sub>2</sub>O) undergo oxidation in the presence of a catalyst, typically platinum (Pt) or platinum–ruthenium (Pt–Ru). This reaction results in the formation of carbon dioxide (CO<sub>2</sub>), protons (H<sup>+</sup>), and electrons (e<sup>−</sup>):</p>
+      <div class="equation">
+        CH<sub>3</sub>OH + H<sub>2</sub>O → CO<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup>
+      </div>
+
+      <h3>&nbsp;Proton Exchange and Electron Flow</h3>
+      <p>Adjacent to the anode is a proton exchange membrane (PEM), often made of Nafion, which plays a crucial role in directing charge flow. This membrane allows the passage of protons (H<sup>+</sup>) from the anode to the cathode while preventing unwanted methanol crossover, a major source of efficiency loss in DMFCs. Meanwhile, the electrons generated at the anode travel through an external circuit, creating an electric current before reaching the cathode.</p>
+
+      <h3>&nbsp;Cathode Reaction: Oxygen Reduction</h3>
+      <p>At the cathode, oxygen gas (O<sub>2</sub>) is reduced in the presence of platinum or specialized catalysts such as RuSe, which help mitigate performance losses due to methanol crossover. The incoming oxygen reacts with protons from the membrane and electrons from the external circuit to form water:</p>
+      <div class="equation">
+        (3/2)O<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup> → 3H<sub>2</sub>O
+      </div>
+
+      <h3>&nbsp;Theoretical Maximum Voltage &amp; Energy Efficiency</h3>
+      <p>The ideal electromotive force (EMF) of a DMFC, derived from the Gibbs free energy change of the overall reaction:</p>
+      <div class="equation">
+        (3/2)O<sub>2</sub> + CH<sub>3</sub>OH → CO<sub>2</sub> + 2H<sub>2</sub>O
+      </div>
+      <p>is approximately 1.2&nbsp;V per cell. However, due to losses from activation polarization, ohmic resistance, and mass transport limitations, practical operating voltages typically range between 0.3&nbsp;V and 0.6&nbsp;V per cell. The Nernst equation accounts for real operating conditions:</p>
+      <div class="equation">
+        E = E<sub>0</sub> − (RT / nF) ln Q
+      </div>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#context">Background</a></li>
-        <li><a href="#instructions">Instructions</a></li>
-        <li><a href="#progress">Progress</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#documents">Documents</a></li>
-        <li><a href="#team">Team</a></li>
+        <li>E<sub>0</sub> = 1.20 V</li>
+        <li>R = 8.314 J/(mol·K)</li>
+        <li>T = 298 K</li>
+        <li>n = 6 (electrons)</li>
+        <li>F = 96 485 C/mol</li>
+        <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>)/([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
       </ul>
-    </nav>
-  </header>
 
-  <!-- Project Overview -->
-  <section id="overview" class="section">
-    <h2>Project Overview</h2>
-    <p>
-      This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on 3% methanol solution (~1M), and is designed to produce sufficient voltage and current to charge a 20,000 mAh battery pack within 24 hours.
-    </p>
-    <p>
-      Our prototype integrates fluid dynamics (via peristaltic pumping), real-time monitoring (via Arduino and sensors), and electrical circuitry for power conditioning. We aim to validate theoretical predictions of fuel consumption, current density (~50–100 mA/cm²), and overall efficiency (~20–40%).
-    </p>
-    <p>
-      Key design constraints include minimizing methanol crossover, maximizing fuel cell power output, and designing a dynamic circuitry for live readings and feedback.
-    </p>
-  </section>
+      <h3>&nbsp;Summary of the DMFC Operation</h3>
+      <ul>
+        <li>Anode: Methanol and water oxidize, producing protons, electrons, and CO<sub>2</sub>.</li>
+        <li>Proton Exchange Membrane: Conducts protons to cathode, blocks methanol crossover.</li>
+        <li>Electron Flow: Electrons traverse an external circuit to generate power.</li>
+        <li>Cathode: Oxygen is reduced with protons/electrons to form water.</li>
+        <li>Voltage Output: Theoretical 1.2 V, practical 0.3–0.6 V due to losses.</li>
+      </ul>
+    </section>
 
-  <!-- Full Technical Context -->
-  <section id="context" class="section">
-    <h2>Full Project Background & Technical Overview</h2>
+    <!-- 3. Prototyping Approach -->
+    <section id="prototyping-approach">
+      <h2>3&nbsp;Prototyping Approach</h2>
+      <p>Our prototyping approach follows a staged methodology aimed at optimizing the design and achieving the highest possible voltage for our direct methanol fuel cell (DMFC).</p>
 
-    <h3>How the DMFC Works</h3>
-    <p>
-      The direct methanol fuel cell (DMFC) is an electrochemical device that converts the
-      chemical energy of methanol into electrical energy through redox reactions. Unlike combustion, which releases energy primarily as heat, the DMFC harnesses this energy to
-      drive electron flow, producing electricity in a controlled manner.
-    </p>
-    
-    <p>
-      In a DMFC, methanol (CH<sub>3</sub>OH) is oxidized at the anode:
-    </p>
-    <p class="equation">
-      CH<sub>3</sub>OH + H<sub>2</sub>O → CO<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup>
-    </p>
-    <p>
-      Protons pass through a proton exchange membrane (PEM) to the cathode, while electrons go through an external circuit. At the cathode:
-    </p>
-    <p class="equation">
-      (3/2)O<sub>2</sub> + 6H<sup>+</sup> + 6e<sup>−</sup> → 3H<sub>2</sub>O
-    </p>
-    <p>
-      The theoretical cell voltage is ~1.20 V, but practical output is closer to 0.3–0.6 V due to real-world losses.
-    </p>
+      <h3>&nbsp;Minimum Viable Prototype (MVP)</h3>
+      <ul>
+        <li>Membrane Electrode Assembly (MEA): Purchase commercial MEA for reliability.</li>
+        <li>Passive Fuel Delivery: Rely on diffusion and natural convection to simplify build.</li>
+        <li>Basic Performance Metrics: Measure voltage and current to establish a baseline.</li>
+      </ul>
 
-    <h3>Prototyping Strategy</h3>
-    <ul>
-      <li><strong>MVP:</strong> Basic 10-cell stack with passive MeOH feed and commercial MEA</li>
-      <li><strong>Next:</strong> Active control, vertical vs. horizontal orientation, vapor feed</li>
-      <li><strong>Stretch Goal:</strong> 5V output, our own MEA assembly, and charge a 20,000 mAh pack</li>
-    </ul>
+      <h3>&nbsp;Optimization and Enhancements</h3>
+      <h4>1. Active Control Implementation</h4>
+      <ul>
+        <li>Introduce sensors (flow meters, temperature, concentration) for dynamic reactant control.</li>
+        <li>Use Arduino-based control and a micropump for precise MeOH delivery.</li>
+      </ul>
 
-    <h3>Key Technical Targets</h3>
-    <ul>
-      <li>Current density: 50–100 mA/cm²</li>
-      <li>Flow rate: 100 cc/min</li>
-      <li>Fuel: 3% methanol by weight (≈1M)</li>
-      <li>Efficiency: 20–40%</li>
-    </ul>
+      <h4>2. Vapor vs. Liquid Feed Comparison</h4>
+      <ul>
+        <li>Test vaporized MeOH feed to reduce crossover and increase reaction rates.</li>
+        <li>Assess the effect of higher operating temperatures on kinetics.</li>
+      </ul>
 
-    <h3>Nernst Equation</h3>
-    <p class="equation">
-      E = E<sup>0</sup> − (RT / nF) ln(Q)
-    </p>
-    <ul>
-      <li>E<sup>0</sup> = 1.20 V</li>
-      <li>n = 6 (electrons)</li>
-      <li>T = 298 K</li>
-      <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>) / ([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
-    </ul>
+      <h4>3. Geometrical Configurations</h4>
+      <ul>
+        <li>Compare horizontal vs. vertical stack orientation for CO<sub>2</sub> removal.</li>
+        <li>Explore different anode/cathode diffusion layers (ADL/CDL).</li>
+      </ul>
 
-    <h3>Development Timeline</h3>
-    <ul>
-      <li><strong>Weeks 1–3:</strong> Research and part ordering</li>
-      <li><strong>Weeks 4–6:</strong> Initial testing and validation</li>
-      <li><strong>Weeks 7–9:</strong> Sensor integration and performance experiments</li>
-      <li><strong>Weeks 10–13:</strong> Optimization and MEA fabrication</li>
-      <li><strong>Week 14:</strong> Final demo and report</li>
-    </ul>
-  </section>
+      <h4>4. MEA Fabrication</h4>
+      <ul>
+        <li>Attempt self-assembly of PEM + Pt–Ru catalyst layers.</li>
+        <li>Revert to commercial MEA if performance is insufficient.</li>
+      </ul>
 
-  <!-- Instructions -->
-  <section id="instructions" class="section">
-    <h2>How to Build and Run the Setup</h2>
+      <h4>5. Final Voltage Benchmark and System Refinement</h4>
+      <ul>
+        <li>Target 5 V via serial/parallel stacking of cells.</li>
+        <li>Fine-tune MeOH concentration, flow rates, and temperature.</li>
+      </ul>
 
-    <h3>Materials Used</h3>
-    <ul>
-      <li>10-cell Flex-Stak DMFC</li>
-      <li>Peristaltic pump, tubing, check valves</li>
-      <li>Arduino Uno + sensors (voltage, current, flow)</li>
-      <li>1M MeOH-water solution (3% by weight)</li>
-      <li>Custom control circuit with MOSFETs</li>
-    </ul>
+      <h3>&nbsp;Future Considerations</h3>
+      <ul>
+        <li>Alternative non-Pt catalysts for cost reduction.</li>
+        <li>3D-printed structural components for rapid iteration.</li>
+        <li>Hybrid fuel systems (e.g., integrating H<sub>2</sub>) for higher energy density.</li>
+      </ul>
+    </section>
 
-    <h3>Setup Instructions</h3>
-    <ol>
-      <li>Assemble and torque stack (8–10 in-lbs)</li>
-      <li>Hydrate with DI water before feeding MeOH</li>
-      <li>Start MeOH flow at 100 cc/min</li>
-      <li>Connect sensors and power electronics</li>
-      <li>Begin Arduino logging and output analysis</li>
-    </ol>
+    <!-- 4. Project Timeline -->
+    <section id="project-timeline">
+      <h2>4&nbsp;Project Timeline</h2>
+      <ul>
+        <li>Week 2 (Completed): Literature review and materials identification.</li>
+        <li>Week 4: Parts order confirmation; 3D printing; submit this report (Feb 7).</li>
+        <li>Week 5: Assemble prototype; baseline voltage tests.</li>
+        <li>Weeks 6–7: Sensor integration; active control; troubleshoot.</li>
+        <li>Week 8: Orientation tests; concentration variations; refine prints.</li>
+        <li>Weeks 9–10: Vapor vs. liquid feed; flow control calibration.</li>
+        <li>Week 11: Self-assembled MEA benchmarking.</li>
+        <li>Weeks 12–13: Final optimization toward 5 V goal.</li>
+        <li>Week 14: Final presentation and comprehensive report.</li>
+      </ul>
+    </section>
 
-    <h3>System Diagram</h3>
-    <img src="DMFC-circuit-cad-2.png" alt="Calibration Curve" style="max-width: 45%;">
-  </section>
+    <!-- 5. Preliminary Calculations -->
+    <section id="preliminary-calculations">
+      <h2>5&nbsp;Preliminary Calculations</h2>
+      <p>Accurate theoretical calculations are essential for predicting DMFC performance and optimizing efficiency.</p>
 
-  <!-- Progress -->
-  <section id="progress" class="section">
-    <h2>Progress Log</h2>
-    <ul>
-      <li><strong>Feb:</strong> Design ideation, sourcing parts, timeline</li>
-      <li><strong>March:</strong> Hardware integration, calibration curves, first tests</li>
-      <li><strong>April:</strong> Full testing, control system development, data analysis</li>
-    </ul>
+      <h3>&nbsp;Nernst Equation Calculations</h3>
+      <div class="equation">
+        E = E<sub>0</sub> − (RT / nF) ln Q
+      </div>
+      <ul>
+        <li>E<sub>0</sub> = 1.20 V</li>
+        <li>R = 8.314 J/(mol·K)</li>
+        <li>T = 298 K</li>
+        <li>n = 6 electrons</li>
+        <li>F = 96 485 C/mol</li>
+        <li>Q = ([CO<sub>2</sub>][H<sub>2</sub>O]<sup>2</sup>)/([CH<sub>3</sub>OH][O<sub>2</sub>]<sup>3/2</sup>)</li>
+      </ul>
 
-    <details>
-      <summary>📋 Full Work Log</summary>
-      <pre>
-<!-- Paste progress log here -->
-{{PROGRESS_LOG_CONTENT}}
-      </pre>
-    </details>
+      <h3>&nbsp;Theoretical Maximum Voltage</h3>
+      <p>The standard theoretical maximum voltage of a DMFC is E<sub>0</sub> = 1.20 V.</p>
 
-    <h3>Gantt Chart</h3>
-    <img src="assets/gantt_chart.png" alt="Gantt Chart" />
-  </section>
+      <h3>&nbsp;Estimated Efficiency and Target Voltage</h3>
+      <ul>
+        <li>Assumed efficiency: 40 %</li>
+        <li>Operational voltage range: 0.3–0.6 V per cell</li>
+        <li>System voltage goal: 4–6 V (5 V target) via stacking</li>
+      </ul>
 
-  <!-- Results -->
-  <section id="results" class="section">
-    <h2>Experimental Results</h2>
-    <ul>
-      <li>~3.8V at 50 mA/cm² (10 cells in series)</li>
-      <li>5 A total current, 19–30 W output</li>
-      <li>Low MeOH crossover at 1M</li>
-      <li>Increased crossover at >1.5M feed concentrations</li>
-    </ul>
+      <h3>&nbsp;System Parameters</h3>
+      <ul>
+        <li><strong>Fuel Cell Stack:</strong> 10 cells in series</li>
+        <li><strong>Active Area per Cell:</strong> 10&nbsp;cm²</li>
+        <li><strong>Estimated Current Density:</strong> 50–100&nbsp;mA/cm²</li>
+        <li><strong>Total Current Output:</strong> 5&nbsp;A (at 50&nbsp;mA/cm²)</li>
+        <li><strong>Expected Voltage Output:</strong> 3.8&nbsp;V under load, 4.3&nbsp;V open circuit</li>
+        <li><strong>Expected Power Output:</strong> 19&nbsp;W at 50&nbsp;mA/cm², up to 32&nbsp;W at 100&nbsp;mA/cm²</li>
+      </ul>
 
-    <h3>I-V and Power Curve</h3>
-    <img src="assets/power_iv_plot.png" alt="Power/IV Curve" />
+      <h3>&nbsp;Methanol Consumption Estimate</h3>
+      <ul>
+        <li><strong>Feed Concentration:</strong> 3% methanol by mass (approx. 1 M)</li>
+        <li><strong>Feed Rate:</strong> 100 cc/min = 6 L/hr</li>
+        <li><strong>Specific Gravity of Methanol:</strong> 0.792 g/mL</li>
+        <li><strong>Estimated Methanol Content:</strong> ~143 g/hr</li>
+        <li><strong>Energy Density of Methanol:</strong> 6 kWh/kg</li>
+        <li><strong>Effective Power (20% conversion efficiency):</strong></li>
+      </ul>
+      <div class="equation">
+        P = 143 g/hr × (6 kWh / 1000 g) × 0.20 = 0.17 kWh/hr = 170 W
+      </div>
 
-    <h3>Pump Calibration Curve</h3>
-    <img src="calibration curve.png" alt="Calibration Curve" style="max-width: 45%;">
-  </section>
+      <h3>&nbsp;Discrepancy: Theoretical vs. Experimental Power</h3>
+      <ul>
+        <li>Power from current density &amp; area: 19–32 W</li>
+        <li>Power from fuel energy &amp; conversion efficiency: 170 W</li>
+        <li><strong>Conclusion:</strong> Nearly an order-of-magnitude gap. Causes may include overestimated efficiency or underestimated current output. Further validation required.</li>
+      </ul>
 
-  <!-- Documents -->
-  <section id="documents" class="section">
-    <h2>Reference Documents</h2>
-    <ul>
-      <li><strong>Preliminary Report:</strong> <a href="DMFC_Prelim_Report_ Final_FinalFR.pdf" target="_blank">View PDF</a></li>
-      <li><strong>Methanol SDS:</strong> <a href="methanol-sds.pdf" target="_blank">Safety Sheet</a></li>
-      <li><strong>Hydrogen SDS:</strong> <a href="hydrogendatasheet.pdf" target="_blank">Safety Sheet</a></li>
-      <li><strong>Charge Time Estimate:</strong> <a href="CBE_3300_Power_estimates.pdf" target="_blank">Energy Calculations</a></li>
-    </ul>
-  </section>
+      <h3>&nbsp;Charge Time Estimation</h3>
+      <p><strong>Battery Target:</strong> 20,000 mAh at 4 V = 80 Wh</p>
+      <p><strong>Assuming Ideal Output:</strong></p>
+      <div class="equation">
+        t = 80 Wh ÷ 19 W ≈ 4.2 hours
+      </div>
+      <ul>
+        <li><strong>Optimistic Scenario:</strong> ~3 hours (with higher current/power)</li>
+        <li><strong>Conservative Benchmark:</strong> ≤24 hours still acceptable</li>
+      </ul>
 
-  <!-- Team -->
-  <section id="team" class="section">
-    <h2>Team</h2>
-    <ul>
-      <li><strong>Karam Alkaissy</strong></li>
-      <li><strong>Max Huang</strong></li>
-      <li><strong>Jack Leitzell</strong></li>
-      
-    </ul>
-  </section>
+      <h3>&nbsp;Crossover &amp; Efficiency Considerations</h3>
+      <ul>
+        <li>Pure methanol increases crossover → cathode poisoning &amp; fuel waste.</li>
+        <li>Voltage decay up to 30% within first few hours due to crossover.</li>
+        <li><strong>Strategy:</strong> Begin with 1 M feed, then incrementally raise concentration while monitoring crossover and power output.</li>
+      </ul>
+    </section>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 Methanol Dynamics | CBE 3300B | University of Pennsylvania</p>
-  </footer>
+    <!-- 6. Purchasing List -->
+    <section id="purchasing-list">
+      <h2>6&nbsp;Purchasing List</h2>
+      <p>A comprehensive list of components and equipment for the DMFC prototype.</p>
+
+      <h3>&nbsp;Core Fuel Cell Components</h3>
+      <ul>
+        <li><strong>Membrane Electrode Assembly (MEA):</strong> 170 µm Nafion; Pt–Ru anode (4.0 mg/cm²); Pt black cathode (4.0 mg/cm²); carbon-cloth MPL; cost ≈ $170 (2.2 cm × 2.2 cm).</li>
+        <li><strong>Current Collectors:</strong> Gold-plated stainless steel; facilitate electron collection; ≈ $30 each.</li>
+        <li><strong>Proton Exchange Membrane (PEM):</strong> Nafion; blocks methanol crossover.</li>
+      </ul>
+
+      <h3>&nbsp;Active Control and Monitoring Components</h3>
+      <ul>
+        <li>Flow meters, temperature sensors, concentration monitors, voltage/current sensors</li>
+        <li>Arduino microcontroller, actuators/pumps, power management module</li>
+      </ul>
+
+      <h3>&nbsp;Vapor Feed System</h3>
+      <ul>
+        <li>Methanol vaporizer, gas flow regulators, humidifier chamber</li>
+      </ul>
+
+      <h3>&nbsp;MEA Fabrication Equipment</h3>
+      <ul>
+        <li>Pt–Ru catalyst ink, screen printer, hot press, electrochemical workstation</li>
+      </ul>
+
+      <h3>&nbsp;3D-Printed and Custom Components</h3>
+      <ul>
+        <li>Custom flow-field plates, housings, tubing, connectors</li>
+      </ul>
+    </section>
+
+    <!-- 7. References -->
+    <section id="references">
+      <h2>7&nbsp;References</h2>
+      <ol class="references">
+        <li>Direct Methanol Fuel Cells – Nernst Equation and Performance Analysis. Available at: https://www.sciencedirect.com/topics/chemistry/direct-methanol-fuel-cell.</li>
+        <li>DMFC Efficiency Study: “The potential efficiency (ε<sub>f</sub>) of a DMFC for an operational cell e.m.f. (E) of 0.5 V is about 40%.” Available at: https://www.sciencedirect.com/topics/chemistry/direct-methanol-fuel-cell.</li>
+        <li>Fuel Cell Store – Direct Methanol MEA. Available at: https://www.fuelcellstore.com/direct-methanol-mea.</li>
+        <li>MSE Supplies – Gold-Plated Current Collectors. Available at: https://www.msesupplies.com/products/pt-and-au-wire-0-6-mm-dia-10-mm-length-unit.</li>
+        <li>Methanol-Resistant Oxygen-Reduction Catalysts for DMFCs. Available at: https://www.annualreviews.org/content/journals/10.1146/annurev.matsci.33.072302.093511.</li>
+        <li>Limiting Current Behavior of the DMFC. Available at: https://www.sciencedirect.com/science/article/pii/S0013468699002856.</li>
+        <li>Performance of a Direct Methanol Fuel Cell. Available at: https://link.springer.com/article/10.1023/A:1003263632683.</li>
+        <li>Basile &amp; Dalena (Eds.), Methanol: Science and Engineering. Chapter 14: Direct Methanol Fuel Cells. Elsevier, 2018. Available at: https://www.amazon.com/Methanol-Science-Engineering-Angelo-Basile/dp/0444639039.</li>
+      </ol>
+    </section>
+
+    <footer>
+      &copy; 2025 Methanol Dynamics &amp; Company LLP — Preliminary Design Report
+    </footer>
+  </div>
+
 </body>
 </html>
+
 
 
 
