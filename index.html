@@ -160,26 +160,52 @@
           Chemical and Biomolecular Engineering<br>
           University of Pennsylvania
         </p>
-      </header>
+    </header>
 
 
-
-
-
-    <!-- 1. Introduction -->
 
     <section id="introduction">
-      <h2>1&nbsp;Introduction</h2>
-      <p>
-        This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on a 3% methanol solution (~1 M), and is designed to produce sufficient voltage and current to charge a 10,000 mAh battery pack.
-      </p>
-      <p>
-        Our prototype integrates fluid control (via peristaltic pumping), real-time monitoring (via Arduino and sensors), and electrical circuitry for power conditioning, and the design and iteration of feedback loops. We aim to validate theoretical predictions of fuel consumption, current density (~50–100 mA/cm²), and overall efficiency (~20–40%).
-      </p>
-      <p>
-        Key design constraints include controlling battery charge time through user input, maximizing fuel cell power output, designing a dynamic circuitry for live readings and active feedback, and minimizing methanol crossover.
-      </p>
-    </section>
+        <h2>1&nbsp;Introduction</h2>
+        
+        <p>
+          This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on a 3 % methanol solution (~1 M), and is designed to produce sufficient voltage and current to charge a 20,000 mAh battery pack within 24 hours.
+        </p>
+        <p>
+          Our prototype integrates fluid dynamics (via peristaltic pumping), real-time monitoring (via Arduino and sensors), and electrical circuitry for power conditioning. We aim to validate theoretical predictions of fuel consumption, current density (~50 – 100 mA/cm²), and overall efficiency (~20 – 40 %).
+        </p>
+        <p>
+          Key design constraints include minimizing methanol crossover, maximizing fuel cell power output, and designing dynamic circuitry for live readings and feedback.
+        </p>
+      
+        <h3>Market Context</h3>
+        <p>
+          Fuel cell technology is poised for significant growth, with the global market expected to reach approximately <strong>$11 billion by 2029</strong>. Fuel cells are already used for:
+        </p>
+        <ul>
+          <li>Stationary electricity production</li>
+          <li>Vehicular powertrains</li>
+          <li>Energy storage systems</li>
+        </ul>
+        <p>
+          Methanol fuel cells, in particular, represent a less mature segment with strong potential due to liquid fuel ease and high energy density.
+        </p>
+      
+        <h3>SWOT Analysis</h3>
+        <ul>
+          <li><strong>Strength:</strong> Higher volumetric energy density than hydrogen; competitive with gasoline in conversion efficiency.</li>
+          <li><strong>Weakness:</strong> Toxicity and flammability concerns—methanol can cause health hazards if ingested and poses a fire risk.</li>
+          <li><strong>Opportunity:</strong> Operates on dilute liquid feed, simplifying storage and enabling safer operation.</li>
+          <li><strong>Threat:</strong> Competition from hydrogen fuel cells, which enjoy greater research focus and market adoption.</li>
+        </ul>
+      
+        <h3>Competitor Analysis</h3>
+        <ul>
+          <li>DMFCs are popular in <em>portable power applications</em> and <em>defense</em> due to modularity, high power density, low noise, and minimal thermal signature.</li>
+          <li>Key players in portable power: <strong>Blue World Technologies ApS</strong> (Denmark).</li>
+          <li>Key players in defense: <strong>SFC Energy</strong> (Germany).</li>
+        </ul>
+      </section>
+      
 
     <!-- 2. Electrochemical Operation -->
     <section id="electrochemical-operation">
@@ -285,21 +311,52 @@
       </ul>
     </section>
 
-    <!-- 4. Project Timeline -->
-    <section id="project-timeline">
-      <h2>4&nbsp;Project Timeline</h2>
-      <ul>
-        <li>Week 2 (Completed): Literature review and materials identification.</li>
-        <li>Week 4: Parts order confirmation; 3D printing; submit this report (Feb 7).</li>
-        <li>Week 5: Assemble prototype; baseline voltage tests.</li>
-        <li>Weeks 6–7: Sensor integration; active control; troubleshoot.</li>
-        <li>Week 8: Orientation tests; concentration variations; refine prints.</li>
-        <li>Weeks 9–10: Vapor vs. liquid feed; flow control calibration.</li>
-        <li>Week 11: Self-assembled MEA benchmarking.</li>
-        <li>Weeks 12–13: Final optimization toward 5 V goal.</li>
-        <li>Week 14: Final presentation and comprehensive report.</li>
-      </ul>
-    </section>
+    <!-- 4. Project Timeline & Tracking Progress -->
+<section id="project-timeline">
+    <h2>4&nbsp;Project Timeline &amp; Tracking Progress</h2>
+  
+    <!-- 4.1 Gantt Chart Embed -->
+    <h3>&nbsp;Gantt Chart</h3>
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/18CdpdSgIVANfqoVWxQVcNEOPbPJYtTVe/htmlembed?gid=1576941100"
+      style="width:100%; height:400px; border:1px solid #ccc;"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+    <p>
+      <a href="https://docs.google.com/spreadsheets/d/18CdpdSgIVANfqoVWxQVcNEOPbPJYtTVe/edit?gid=1576941100"
+         target="_blank" rel="noopener">
+        View Full Gantt Chart
+      </a>
+    </p>
+  
+    <!-- 4.2 Weekly Breakdown -->
+    <h3>&nbsp;Weekly Breakdown</h3>
+    <ul>
+      <li><strong>Week of Feb 24:</strong> Ordered 10-cell stack, drafted Gantt chart, and outlined project scope.</li>
+      <li><strong>Week of Mar 3:</strong> Designed control circuitry and peristaltic pump schedule; created pump calibration curve.</li>
+      <li><strong>Week of Mar 10:</strong> Spring break (no active lab work).</li>
+      <li><strong>Week of Mar 17:</strong> Integrated pump and circuit, set up plumbing, and performed initial flow‐rate tests.</li>
+      <li><strong>Week of Mar 24:</strong> Fixed methanol plumbing, reran pump calibrations, prepared 3% MeOH feed, and verified pump performance.</li>
+      <li><strong>Week of Mar 31:</strong> Ran DI-water then 3% MeOH tests; collected current–voltage data and diagnosed performance.</li>
+      <li><strong>Week of Apr 7:</strong> Soldered permanent circuit board; adapted temperature-sensor script to plot fuel cell voltage.</li>
+      <li><strong>Week of Apr 14:</strong> Finalized sensor-processing code; updated progress log for reproducibility.</li>
+    </ul>
+  
+    <!-- 4.3 Progress Log Preview & Download -->
+    <h3>&nbsp;Progress Log</h3>
+    <p>
+      A concise record of our weekly milestones is below.  
+      <a href="progress_log.pdf" target="_blank" rel="noopener">Download the full progress log (PDF)</a>.
+    </p>
+    <embed
+      src="progress_log.pdf"
+      type="application/pdf"
+      width="100%"
+      height="300px"
+      style="border:1px solid #ccc;" />
+  </section>
+
 
     <!-- 5. Preliminary Calculations -->
     <section id="preliminary-calculations">
