@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,7 +169,7 @@
         <h2>1&nbsp;Introduction</h2>
         
         <p>
-          This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on a 3 % methanol solution (~1 M), and is designed to produce sufficient voltage and current to charge a 20,000 mAh battery pack within 24 hours.
+          This project explores the design and prototyping of a Direct Methanol Fuel Cell (DMFC) system using a 10-cell Flex-Stak from the Fuel Cell Store. The cell operates on a 3 % methanol solution (~1 M), and is designed to produce sufficient voltage and current to charge a 10,000 mAh battery pack within 24 hours.
         </p>
         <p>
           Our prototype integrates fluid dynamics (via peristaltic pumping), real-time monitoring (via Arduino and sensors), and electrical circuitry for power conditioning. We aim to validate theoretical predictions of fuel consumption, current density (~50 – 100 mA/cm²), and overall efficiency (~20 – 40 %).
@@ -311,6 +312,73 @@
       </ul>
     </section>
 
+    <!-- 3. Prototyping Approach -->
+<section id="prototyping-approach">
+    <h2>3&nbsp;Prototyping Approach</h2>
+    <p>
+      Our prototyping approach follows a staged methodology aimed at optimizing the design and achieving the highest possible voltage for our direct methanol fuel cell (DMFC).  
+      The MVP goal is to develop a control device that precisely feeds methanol solution to the cell, monitors key parameters in real time, and is capable of charging an electronic device within a reasonable timeframe.
+    </p>
+  
+    <h3>Minimum Viable Prototype (MVP)</h3>
+    <ul>
+      <li>
+        <strong>Control &amp; Monitoring System:</strong>  
+        Peristaltic pump + Arduino controller for precise MeOH delivery; sensors (flow, temperature, voltage, current) for real-time performance tracking; designed to charge a 10,000 mAh battery pack with time close to theoretical estimates (See 5. Preliminary Calculations).
+      </li>
+      <li>
+        <strong>Passive Fuel Delivery (Alternative):</strong>  
+        Relies on diffusion and natural convection—simple and low‐cost, but lacks precise dosing and data logging. We opted for active control to enable data‐driven optimization and reproducibility.
+      </li>
+      <li>
+        <strong>Baseline Testing:</strong>  
+        Establish voltage‐current curves under controlled conditions to benchmark performance.
+      </li>
+    </ul>
+  
+    <h3>Design Choices</h3>
+  
+    <h4>1. Active Control Implementation</h4>
+    <ul>
+      <li>Introduce sensors (flow meters, temperature, concentration) for dynamic reactant control.</li>
+      <li>Use Arduino‐based control and a micropump for precise MeOH delivery.</li>
+      <li>
+        <em>Passive Strategy Comparison:</em>  
+        Passive feed is often chosen for its simplicity and reliability, but it offers no fine control or live feedback—hence our choice of active control for precision and data acquisition.
+      </li>
+    </ul>
+  
+    <h4>2. Vapor vs. Liquid Feed Comparison</h4>
+    <ul>
+      <li>
+        <strong>Vapor Feed Merits:</strong> Reduced methanol crossover and higher kinetics at elevated temperature.
+      </li>
+      <li>
+        <strong>Vapor Feed Cons:</strong> Requires vaporizer, accurate concentration monitoring, and complex safety controls; a “simple” version (bubbling N₂ through MeOH) is difficult to implement and monitor reliably.
+      </li>
+      <li>
+        <strong>Liquid Feed Merits:</strong> Direct metering with peristaltic pump, straightforward flow‐rate measurement, and robust implementation.
+      </li>
+      <li>
+        <strong>Liquid Feed Cons:</strong> Higher crossover risk, mitigated by membrane choice and optimized flow rates.
+      </li>
+      <li><strong>Decision:</strong> Liquid feed selected for practicality, repeatability, and ease of monitoring.</li>
+    </ul>
+  
+    <h4>3. Stack Orientation</h4>
+    <ul>
+      <li>Literature shows vertical stacking can improve gas diffusion and CO₂ removal.</li>
+      <li>Manufacturer recommends horizontal orientation; we follow this guideline for our MVP to ensure proper sealing and simplify assembly.</li>
+    </ul>
+  
+    <h4>4. Final Voltage Benchmark and System Refinement</h4>
+    <ul>
+      <li>Target 5 V via serial/parallel stacking of cells.</li>
+      <li>Fine‐tune MeOH concentration, flow rates, and operating temperature to maximize power density and efficiency.</li>
+    </ul>
+  </section>
+  
+
     <!-- 4. Project Timeline & Tracking Progress -->
 <section id="project-timeline">
     <h2>4&nbsp;Project Timeline &amp; Tracking Progress</h2>
@@ -417,7 +485,7 @@
       </ul>
 
       <h3>&nbsp;Charge Time Estimation</h3>
-      <p><strong>Battery Target:</strong> 20,000 mAh at 4 V = 80 Wh</p>
+      <p><strong>Battery Target:</strong> 10,000 mAh at 4 V = 80 Wh</p>
       <p><strong>Assuming Ideal Output:</strong></p>
       <div class="equation">
         t = 80 Wh ÷ 19 W ≈ 4.2 hours
@@ -600,3 +668,4 @@
   
   </body>
   </html>
+
