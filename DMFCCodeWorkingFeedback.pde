@@ -127,7 +127,8 @@ void mousePressed() {
       // Constants
       float C = 10;
       float Rthev = 72.5;
-      float targetVoltage = 5.4 + C * Rthev / time;
+      float threshold = 5.4;
+      float targetVoltage = threshold + C * Rthev / time;
       float voltageToPump = (targetVoltage) / K;
       float newDuty = constrain(voltageToPump / 18.0, 0.0, 1.0);
 
