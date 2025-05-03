@@ -597,8 +597,56 @@
     </pre>
     
   
+  <!-- 7.2 Hardware Setup -->
+<h3>&nbsp;Hardware Setup</h3>
+<p>
+  Our hardware setup integrates the DMFC stack, peristaltic pump, control electronics, and tubing into a single, portable enclosure.  
+  The computer communicates with the Arduino via USB, while the Arduino drives the pump and reads sensors. Below is our assembly diagram and connection overview:
+</p>
+<img src="updatedcircuitdiagram.jpg" alt="Circuit Diagram" 
+     style="display:block; margin:1em auto; max-width:75%;" />
+
+<ul>
+  <li>
+    <strong>Fuel Cell Stack:</strong>  
+    The 10-cell Flex-Stak is mounted on the front panel. Two bulkhead fittings carry the inlet tubing (from the MeOH feed) and the outlet tubing (to waste).
+  </li>
+  <li>
+    <strong>Peristaltic Pump:</strong>  
+    Secured to the top of the enclosure, it draws 3 wt% methanol from the feed reservoir through Tygon 2375 (1 mm ID, 3 mm OD) tubing and delivers it to the fuel cell inlet.
+  </li>
+  <li>
+    <strong>Arduino &amp; Sensor Electronics:</strong>  
+    Housed inside the box, the Arduino reads the stack voltage via an analog pin (through a resistor divider) and controls the pump motor via a MOSFET driver.
+  </li>
+  <li>
+    <strong>MOSFET Driver &amp; Flyback Diode:</strong>  
+    The MOSFET switches the 18 V battery supply to the pump under PWM control. A diode across the pump motor terminals suppresses back-EMF spikes.
+  </li>
+  <li>
+    <strong>Battery Pack &amp; Power Switch:</strong>  
+    An 18 V battery pack powers both pump and stack. A front-panel toggle switch isolates power for safe startup and shutdown.
+  </li>
+  <li>
+    <strong>USB Serial Connection:</strong>  
+    A USB cable links the Arduino to the PC for real-time data logging and control commands at 9600 baud.
+  </li>
+  <li>
+    <strong>Enclosure Housing:</strong>  
+    A custom-designed CAD box holds all components, with cutouts for tubing, connectors, ventilation, and user interface.
+  </li>
+</ul>
+
+<p style="text-align:center;">
+  <a href="FuelCellCircuitHousing v1.3mf" download
+     style="display:inline-block; background:#001f3f; color:#fff; padding:0.5em 1em; border-radius:4px; text-decoration:none;">
+    Download CAD Enclosure (v1.3)
+  </a>
+</p>
+
+    
   
-    <!-- 7.1 Pump Calibration -->
+  <!-- 7.1 Pump Calibration -->
     <h3>&nbsp;Pump Calibration</h3>
     <p>
       To characterize our peristaltic pump, we measured flow rate (Q) as a function of applied voltage (V<sub>app</sub>) using DI water. The resulting data were fit to a linear model:
@@ -636,6 +684,8 @@
       <li>Introduced a small fan for continuous O₂ feed; we noticed performance dropped, likely due to cooling the stack.</li>
       <li>Tested higher‐than‐recommended methanol concentrations; observed an initial voltage spike followed by rapid decline, likely due to methanol crossover.</li>
     </ul>
+
+  
   
     <!-- 7.3 Feedback Loop Placeholder -->
     <h3>&nbsp;Feedback Loop &amp; Control Iteration</h3>
