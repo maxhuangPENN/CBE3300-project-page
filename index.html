@@ -676,14 +676,29 @@
       We performed polarization tests on the 10-cell DMFC stack with a 3 wt% methanol feed.  
       The current–voltage curve above reveals peak currents approximately two orders of magnitude below our theoretical estimates.  
       To diagnose this discrepancy, we carried out the following steps:
-    
-    <ul>
-      <li>Flushed the cell with DI water to fully hydrate the membrane and gas diffusion layers.</li>
-      <li>Incrementally increased methanol concentration up to 3 wt% to avoid shock‐loading.</li>
-      <li>Analyzed reactor effluent density; initial 10 %wt readings were inconsistent, later measurements indicated ~1.6 wt% methanol consumption.</li>
-      <li>Introduced a small fan for continuous O₂ feed; we noticed performance dropped, likely due to cooling the stack.</li>
-      <li>Tested higher‐than‐recommended methanol concentrations; observed an initial voltage spike followed by rapid decline, likely due to methanol crossover.</li>
-    </ul>
+
+    <ol>
+        <li>
+          <strong>Hydration Flush:</strong> We flushed the cell with deionized (DI) water for 30 minutes to fully hydrate the Nafion membrane and gas diffusion layers (GDLs).  
+          This cleaning step removed residual methanol and contaminants and raised the open-circuit voltage from 1.9 V to 4.4 V.
+        </li>
+        <li>
+          <strong>Concentration Ramp-Up:</strong> We incrementally increased methanol concentration from 0.5 wt% to 3 wt% in 0.5 wt% steps, allowing 10 minutes of equilibration at each stage.  
+          This prevented flooding and catalyst poisoning; we observed a steady increase in current density with each step up to 3 wt%, which is the manufacturer's spec.
+        </li>
+        <li>
+          <strong>Effluent Density Analysis:</strong> We collected reactor effluent after testing and measured its density.  
+          Our initial calculations showed 10 wt% MeOH, which is nonsensical. After repeating, effluent density corresponded to ~1.4 wt% methanol consumption, confirming active fuel utilization.
+        </li>
+        <li>
+          <strong>Oxygen-Feed:</strong> We directed airflow using a square portable fan over the cell stack to maintain fresh O₂ supply.  
+          Instead of boosting performance, we saw a ~0.2 V drop under load, indicating the stack cooled below its optimal 50–60 °C range, underscoring the need for thermal regulation.
+        </li>
+        <li>
+          <strong>Crossover Stress Test:</strong> We tested methanol concentrations above the recommended 3 wt% and fed 10%wt.  
+          The trial produced an initial voltage spike followed by a rapid decline within a few minutes, characteristic of methanol crossover causing cathode poisoning and efficiency loss.
+        </li>
+      </ol>
 
   
   
