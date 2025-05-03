@@ -516,30 +516,33 @@
     <h2>7&nbsp;Experimental Setup and Results</h2>
     
 
+  
     <!-- 7.1 Software Setup -->
-<section id="software-setup">
-    <h3>&nbsp;Software Setup</h3>
+    <h3>7.1&nbsp;Software Setup</h3>
     <p>
-      The control architecture comprises of code components in Arduino and Processing. Click on the following links to view
-      <a href="04-25-trial-arduino.txt" target="_blank">Arduino Sketch</a> and  
-      <a href="DMFCCodeWorkingFeedback.pde" target="_blank">Processing Sketch</a>.
+      Our control system runs two coordinated programs: an Arduino sketch on the microcontroller and a Processing sketch on the PC.  
+      The Arduino handles real‐time sensor readings and pump PWM, while Processing logs data, visualizes performance, and sends updated control commands back to the Arduino.
     </p>
-
+    <p>
+      View the code here:  
+      <a href="04-25-trial-arduino.txt" target="_blank">Arduino Sketch</a> |  
+      <a href="DMFCCodeWorkingFeedback.pde" target="_blank">Processing Sketch</a>
+    </p>
+  
     <h4>Bidirectional Communication</h4>
     <p>
-      <strong>Arduino → Processing:</strong><br>
-      Sends raw voltage readings as text lines via <code>Serial.println(voltage)</code>.<br>
-      <strong>Processing → Arduino:</strong><br>
-      Sends updated dutyCycle commands in the form <code>SET:&lt;value&gt;</code> to regulate pump PWM.
+      <strong>Arduino → Processing:</strong> Sends voltage readings via <code>Serial.println(voltage)</code><br>
+      <strong>Processing → Arduino:</strong> Sends commands like <code>SET:&lt;value&gt;</code> to adjust the pump duty cycle.
     </p>
-
-
-    <img src="imageimage.jpg" alt="Arduino–Processing Feedback Loop Diagram" 
+    <img src="imageimage.jpg" alt="Arduino–Processing Feedback Loop Diagram"
          style="display:block; margin:1em auto; max-width:75%;" />
-  </section>
-
   
     <h4>Arduino Sketch Overview</h4>
+    <p>
+      The Arduino code initializes serial communication and I/O pins, then continuously:
+      reads the fuel cell voltage sensor, converts that reading to actual voltage, transmits it to Processing, and generates the PWM waveform for the pump.  
+      It also listens for “SET:” commands from Processing to update the duty cycle for closed‐loop control.
+    </p>
     <pre>
   // Pseudocode:
   // 1. Initialize Serial at 9600 baud.
@@ -561,6 +564,10 @@
     </pre>
   
     <h4>Processing Sketch Overview</h4>
+    <p>
+      The Processing application opens the serial port, prepares a live plot and CSV log, and displays a simple UI.  
+      On each incoming voltage reading, it updates the graph and file, computes any error from the target, and sends a “SET:” command back to the Arduino to tweak the pump PWM.
+    </p>
     <pre>
   // Pseudocode:
   // 1. Import processing.serial.* and create data lists.
@@ -588,10 +595,8 @@
   //      • Read user input for target charge time (days),
   //        compute estimate, and display.
     </pre>
-  
     
   
-    
   
     <!-- 7.1 Pump Calibration -->
     <h3>&nbsp;Pump Calibration</h3>
@@ -640,7 +645,10 @@
       <em>Detailed control algorithm and Arduino script to follow in future updates.</em>
     </p>
   </section>
-  
+
+
+
+
   
 
 
