@@ -702,14 +702,92 @@
 
   
   
-    <!-- 7.3 Feedback Loop Placeholder -->
-    <h3>&nbsp;Feedback Loop &amp; Control Iteration</h3>
-    <p>
-      We are developing a closed‐loop control algorithm that uses real‐time sensor data (flow rate, voltage, temperature)  
-      to adjust pump PWM and maintain optimal cell performance.  
-      <em>Detailed control algorithm and Arduino script to follow in future updates.</em>
-    </p>
-  </section>
+  <!-- 7.4 Feedback Loop & Control Iteration -->
+<h3>&nbsp;Feedback Loop &amp; Control Iteration</h3>
+
+<p>
+  <strong>Concept:</strong>  
+  To guarantee our DMFC charges a 10 Ah battery pack within a user‐defined time, we need a closed‐loop that senses actual performance, compares it to the target, and adapts pump flow in real time. Without feedback, variations in cell efficiency, temperature, or crossover would lead to missed charge deadlines.
+</p>
+
+<!-- Implementation Using Riemann Sums -->
+<p><strong>Implementation Using Riemann Sums:</strong></p>
+
+<p>
+  We discretely integrate the delivered charge (current × time) by summing over each sample interval Δt:
+</p>
+<div class="equation" style="text-align:center;">
+  Q<sub>delivered</sub> ≈ &Sigma; I<sub>i</sub> · Δt
+</div>
+
+<p>
+  For a battery of capacity <em>C</em> (Ah) to be charged in time <em>T</em> (h), the required average current is:
+</p>
+<div class="equation" style="text-align:center;">
+  I<sub>target</sub> = C / T
+</div>
+
+<p>
+  At each step <em>n</em>, we compute the instantaneous error
+  <em>e<sub>n</sub> = I<sub>target</sub> − I<sub>n</sub></em>
+  and the cumulative error
+  <em>E<sub>n</sub> = &Sigma; e<sub>i</sub> · Δt</em>.
+</p>
+
+<p>We then update the pump duty cycle <em>D</em> using a PI control law:</p>
+<div class="equation" style="text-align:center;">
+  D<sub>n+1</sub> = D<sub>n</sub> + K<sub>P</sub> · e<sub>n</sub> + K<sub>I</sub> · E<sub>n</sub>
+</div>
+
+<p><strong>This ensures that if we fall behind the target charge rate, the pump speeds up; if we overshoot, it slows down.</strong></p>
+
+
+<div class="equation" style="text-align:center;">
+  D<sub>n+1</sub> = D<sub>n</sub> + K<sub>P</sub>·e<sub>n</sub> + K<sub>I</sub>·E<sub>n</sub>
+</div>
+
+<p>
+    <strong>This ensures that if we fall behind the target charge rate, the pump speeds up; if we overshoot, it slows down.</strong>
+  </p>
+  
+
+<pre>
+// Pseudocode for Feedback Loop:
+// --------------------------------
+// 1. User inputs:
+//      • C = battery capacity (Ah)
+//      • T = target charge time (h)
+// 2. Compute:
+//      • I_target = C / T    // desired average current (A)
+// 3. Initialize:
+//      • D = initial duty cycle (0–1)
+//      • E = 0               // cumulative (integral) error
+//      • t_prev = millis()   // timestamp
+// 4. In main loop (every Δt_ms):
+//      a. t_now = millis()
+//      b. Δt = (t_now - t_prev) / 1000    // convert to seconds
+//      c. t_prev = t_now
+//
+//      d. Read stack voltage V and convert to current I (via calibration curve):
+//           I = f(V)
+//
+//      e. Q_delivered += I * (Δt / 3600)   // Ah delivered this interval
+//
+//      f. error = I_target - I
+//      g. E += error * (Δt / 3600)        // integrate error (Ah)
+//
+//      h. D = constrain( D + Kp*error + Ki*E, 0, 1 )
+//
+//      i. Apply PWM:
+//           onTime  = pwmPeriod * D
+//           offTime = pwmPeriod - onTime
+//           digitalWrite(pumpPin, HIGH); delayMicroseconds(onTime);
+//           digitalWrite(pumpPin, LOW);  delayMicroseconds(offTime);
+//
+//      j. Serial.println("SET:" + D);    // send updated duty cycle to Arduino
+//      k. (Optional) update Processing UI with Q_delivered and remaining time
+// --------------------------------
+</pre>
 
 
 
