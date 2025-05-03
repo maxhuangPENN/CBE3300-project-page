@@ -453,7 +453,7 @@
       </ul>
     </section>
 
-
+    
 
 
     <!-- 6. Purchasing List -->
@@ -507,23 +507,140 @@
       </li>
     </ul>
   </section>
+
+
+
+
+<!-- 7. Experimental Results -->
+<section id="experimental-results">
+    <h2>7&nbsp;Experimental Setup and Results</h2>
+    
+
+    <!-- 7.1 Software Setup -->
+<section id="software-setup">
+    <h3>&nbsp;Software Setup</h3>
+    <p>
+      The control architecture comprises of code components in Arduino and Processing. Click on the following links to view
+      <a href="04-25-trial-arduino.txt" target="_blank">Arduino Sketch</a> and  
+      <a href="DMFCCodeWorkingFeedback.pde" target="_blank">Processing Sketch</a>.
+    </p>
+
+    <h4>Bidirectional Communication</h4>
+    <p>
+      <strong>Arduino → Processing:</strong><br>
+      Sends raw voltage readings as text lines via <code>Serial.println(voltage)</code>.<br>
+      <strong>Processing → Arduino:</strong><br>
+      Sends updated dutyCycle commands in the form <code>SET:&lt;value&gt;</code> to regulate pump PWM.
+    </p>
+
+
+    <img src="imageimage.png" alt="Arduino–Processing Feedback Loop Diagram" 
+         style="display:block; margin:1em auto; max-width:75%;" />
+  </section>
+
+  
+    <h4>Arduino Sketch Overview</h4>
+    <pre>
+  // Pseudocode:
+  // 1. Initialize Serial at 9600 baud.
+  // 2. Configure pwmPin (pump drive) and analogPin (fuel-cell voltage).
+  // 3. Set default dutyCycle, pwmPeriod, and targetCellVoltage.
+  // 4. In loop():
+  //      a. Read analogPin → raw sensorValue.
+  //      b. Convert sensorValue → actual voltage.
+  //      c. Serial.println(voltage) → send to Processing.
+  //      d. Generate PWM on pwmPin:
+  //           HIGH for onTime = pwmPeriod × dutyCycle
+  //           LOW for offTime = pwmPeriod – onTime
+  //      e. If Serial.available():
+  //           • Read line until '\n'
+  //           • If line starts with "SET:",
+  //               parse new dutyCycle = constrain(value, 0 → 1)
+  //      f. (Optional) Every second, adjust dutyCycle up/down
+  //         to approach targetCellVoltage.
+    </pre>
+  
+    <h4>Processing Sketch Overview</h4>
+    <pre>
+  // Pseudocode:
+  // 1. Import processing.serial.* and create data lists.
+  // 2. setup():
+  //      • size(900,600), open first serial port at 9600 baud.
+  //      • create CSV writer "voltage_log_TIMESTAMP.csv".
+  //      • initialize UI: Pause button, input field, Send button.
+  // 3. draw():
+  //      • clear background, draw axes.
+  //      • plot voltageData vs. timeData in real time.
+  //      • draw UI elements and display statistics.
+  // 4. serialEvent():
+  //      • Read incoming line until '\n'.
+  //      • Parse voltage → float.
+  //      • Append to voltageData & timeData.
+  //      • Write "time,voltage" to CSV.
+  //      • Call feedbackControl().
+  // 5. feedbackControl():
+  //      • If interval elapsed and ≥2 data points:
+  //           - Compute deltaV and voltageError.
+  //           - Adjust dutyCycle by small increment.
+  //           - myPort.write("SET:" + dutyCycle + "\n").
+  // 6. Button handlers:
+  //      • Pause/resume data collection.
+  //      • Read user input for target charge time (days),
+  //        compute estimate, and display.
+    </pre>
+  
+    
+  
+    
+  
+    <!-- 7.1 Pump Calibration -->
+    <h3>&nbsp;Pump Calibration</h3>
+    <p>
+      To characterize our peristaltic pump, we measured flow rate (Q) as a function of applied voltage (V<sub>app</sub>) using DI water. The resulting data were fit to a linear model:
+    </p>
+    <div class="equation">
+      Q = 6.1 × V<sub>app</sub> − 9.9 (mL/min)
+    </div>
+    <p>
+      Since the pump is powered by an 18 V battery, we adjust the PWM duty cycle (D) so that V<sub>app</sub> = 18 V × D.  
+      To achieve a target flow Q*, we calculate:
+    </p>
+    <div class="equation">
+      D = (Q* + 9.9) / (6.1 × 18)
+    </div>
+    <p>
+      The calibration plot below shows measured points and the linear fit, enabling precise control of methanol feed rates.
+    </p>
+    <img src="pump-calibration-curve.png" alt="Pump Calibration Curve"
+         style="display:block; margin:1em auto; max-width:75%;" />
+  
+    <!-- 7.2 Fuel Cell Performance -->
+    <h3>&nbsp;Fuel Cell Performance (I–V Curve)</h3>
+    <p>
+      We performed polarization tests on the 10-cell DMFC stack with a 3 wt% methanol feed.  
+      The current–voltage curve below reveals peak currents approximately two orders of magnitude below our theoretical estimates.  
+      To diagnose this discrepancy, we carried out the following steps:
+    </p>
+    <img src="iv-curve.png" alt="Current–Voltage (I–V) Curve"
+         style="display:block; margin:1em auto; max-width:75%;" />
+    <ul>
+      <li>Flushed the cell with DI water to fully hydrate the membrane and gas diffusion layers.</li>
+      <li>Incrementally increased methanol concentration up to 3 wt% to avoid shock‐loading.</li>
+      <li>Analyzed reactor effluent density; initial 10 wt% readings were inconsistent, later measurements indicated ~1.6 wt% methanol consumption.</li>
+      <li>Introduced a small fan for continuous O₂ feed; performance dropped, likely due to overcooling the stack.</li>
+      <li>Tested higher‐than‐recommended methanol concentrations; observed an initial voltage spike followed by rapid decline from methanol crossover.</li>
+    </ul>
+  
+    <!-- 7.3 Feedback Loop Placeholder -->
+    <h3>&nbsp;Feedback Loop &amp; Control Iteration</h3>
+    <p>
+      We are developing a closed‐loop control algorithm that uses real‐time sensor data (flow rate, voltage, temperature)  
+      to adjust pump PWM and maintain optimal cell performance.  
+      <em>Detailed control algorithm and Arduino script to follow in future updates.</em>
+    </p>
+  </section>
   
   
-      <!-- 7. Experimental Results -->
-      <section id="experimental-results">
-        <h2>7&nbsp;Experimental Results</h2>
-        <p>Below are our key experimental outputs:</p>
-        <img src="calibration curve.png" alt="Pump Calibration Curve" style="max-width: 45%; margin-right: 2%;" />
-        <img src="calibration curve.png" alt="IV Curve" style="max-width: 45%;" />
-        <br><br>
-        <img src="IMG_6256.jpg" alt="Circuit Diagram" style="max-width: 45%;" />
-        <p>
-          <strong>Setup Demo Video:</strong>
-          <a href="https://youtu.be/CbhEQC6FZ3c?si=o1pequK2wXnx27N7&t=8" target="_blank" rel="noopener">
-            Watch on YouTube
-          </a>
-        </p>
-      </section>
 
 
     <!-- 8. Reference Documents -->
