@@ -381,7 +381,7 @@
       <h2>5&nbsp;Preliminary Calculations</h2>
       <p>Accurate theoretical calculations are essential for predicting DMFC performance and optimizing efficiency.</p>
 
-      <h3>&nbsp;Nernst Equation Calculations</h3>
+      <h3>&nbsp;Nernst Equation</h3>
       <div class="equation">
         E = E<sub>0</sub> − (RT / nF) ln Q
       </div>
@@ -396,6 +396,73 @@
 
       <h3>&nbsp;Theoretical Maximum Voltage</h3>
       <p>The standard theoretical maximum voltage of a DMFC is E<sub>0</sub> = 1.20 V.</p>
+
+
+      <!-- 5.x Theoretical Voltage vs. Concentration -->
+
+<p>
+  Here we compute the reaction quotient <em>Q</em> using full activities (no unit-activity assumptions) and apply the Nernst equation:
+</p>
+<div class="equation" style="text-align:center;">
+  Q = (a<sub>CO₂</sub>·a<sub>H₂O</sub>²)  
+      / (a<sub>CH₃OH</sub>·a<sub>O₂</sub><sup>3/2</sup>)  
+    = (1·(x<sub>H₂O</sub>)²)  
+      / (x<sub>CH₃OH</sub>·(0.21)<sup>1.5</sup>)
+</div>
+<p>
+  We then compute  
+  <strong>E = 1.20 V − 0.00428 · ln Q</strong>  
+  at 25 °C for various feed compositions:
+</p>
+
+<table style="width:100%; border-collapse:collapse; margin:1em 0;">
+  <colgroup>
+    <col style="width:15%;">
+    <col style="width:15%; padding-left:0.25em;">
+    <col style="width:15%; padding-left:0.25em;">
+    <col style="width:25%; padding-left:0.5em;">
+    <col style="width:15%; padding-left:0.5em;">
+  </colgroup>
+  <thead>
+    <tr style="background:#f4f4f4;">
+      <th style="text-align:left; padding:0.5em;">wt % MeOH</th>
+      <th style="text-align:right; padding:0.5em;">x<sub>CH₃OH</sub></th>
+      <th style="text-align:right; padding:0.5em;">x<sub>H₂O</sub></th>
+      <th style="text-align:right; padding:0.5em;">Q</th>
+      <th style="text-align:right; padding:0.5em;">E (V)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:0.5em;">3</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.0171</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.9829</td>
+      <td style="padding:0.5em; text-align:right;">5.87 × 10²</td>
+      <td style="padding:0.5em; text-align:right;">1.173</td>
+    </tr>
+    <tr>
+      <td style="padding:0.5em;">10</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.0588</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.9412</td>
+      <td style="padding:0.5em; text-align:right;">1.57 × 10²</td>
+      <td style="padding:0.5em; text-align:right;">1.178</td>
+    </tr>
+    <tr>
+      <td style="padding:0.5em;">90</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.8350</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.1650</td>
+      <td style="padding:0.5em; text-align:right;">3.39 × 10⁻¹</td>
+      <td style="padding:0.5em; text-align:right;">1.205</td>
+    </tr>
+    <tr>
+      <td style="padding:0.5em;">99</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.9823</td>
+      <td style="padding:0.5em 0.25em; text-align:right;">0.0177</td>
+      <td style="padding:0.5em; text-align:right;">3.30 × 10⁻³</td>
+      <td style="padding:0.5em; text-align:right;">1.224</td>
+    </tr>
+  </tbody>
+</table>
 
       <h3>&nbsp;Estimated Efficiency and Target Voltage</h3>
       <ul>
@@ -452,6 +519,15 @@
         <li><strong>Strategy:</strong> Begin with 1 M feed, then incrementally raise concentration while monitoring crossover and power output.</li>
       </ul>
     </section>
+
+
+
+
+
+
+
+
+    
 
     
 
